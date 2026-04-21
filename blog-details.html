@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+<meta property="og:type" content="article">
+<meta property="og:image" content="">
+<title>Loading… – Spark Shield Blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#F6F4F1;--bg2:#ECE7E1;--surface:#FFFFFF;--surface2:#F2EEE9;--surface3:#EAE4DD;
+  --text:#1A1A1A;--muted:#6F6B66;--muted2:#9A948C;
+  --accent:#8B5E3C;--accent2:#A67C52;--gold:#C8914F;--fire:#E8620A;--ember:#FF8C00;
+  --border:#E0D9CF;--border2:#CBBBA5;
+}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+/* CURSOR */
+*{cursor:url('weld-cursor.png') 4 2,auto!important}
+a,button,select,[onclick]{cursor:url('weld-pointer.png') 16 16,pointer!important}
+
+body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6}
+
+/* HEAT SCROLL GAUGE */
+#heat-gauge{position:fixed;left:0;top:0;bottom:0;width:4px;z-index:900;background:rgba(139,94,60,.1)}
+#heat-fill{position:absolute;top:0;left:0;width:100%;height:0%;background:linear-gradient(to bottom,#FFD700,#FF8C00,#E8620A,#8B5E3C);transition:height .12s linear;box-shadow:0 0 14px rgba(232,98,10,.6)}
+#heat-icon{position:fixed;left:7px;top:50%;transform:translateY(-50%);font-size:16px;z-index:901;transition:top .12s linear}
+
+/* CLICK SPARK */
+#click-cv{position:fixed;inset:0;z-index:99990;pointer-events:none}
+
+/* AMBIENT SPARK */
+#spark-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.28}
+
+/* SCROLL PROGRESS */
+#prog{position:fixed;top:0;left:0;height:2px;z-index:9000;background:linear-gradient(90deg,var(--accent),var(--fire));width:0;box-shadow:0 0 10px rgba(232,98,10,.6);transition:width .1s linear}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:120px;background:rgba(246,244,241,.93);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:all .4s cubic-bezier(.25,.46,.45,.94)}
+nav.scrolled{height:70px;border-bottom-color:var(--accent);box-shadow:0 8px 40px rgba(139,94,60,.08)}
+.logo-wrap{display:flex;align-items:center}
+.logo-wrap img{height:100px;transition:all .4s cubic-bezier(.25,.46,.45,.94);display:block}
+.logo-scrolled{display:none!important}
+nav.scrolled .logo-default{display:none!important}
+nav.scrolled .logo-scrolled{display:block!important;height:60px}
+.nl{display:flex;align-items:center;gap:36px}
+.nl a{font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;position:relative;font-weight:700}
+.nl a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s}
+.nl a:hover,.nl a.active{color:var(--accent)}
+.nl a:hover::after,.nl a.active::after{width:100%}
+.nr{display:flex;align-items:center;gap:10px}
+.nav-cta{background:var(--accent);color:#fff;padding:10px 24px;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;border:none;display:flex;align-items:center;gap:8px;transition:all .3s}
+.nav-cta:hover{background:var(--fire);transform:translateY(-1px);box-shadow:0 8px 28px rgba(232,98,10,.4)}
+.ham{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
+.ham span{width:22px;height:1.5px;background:var(--text);border-radius:1px;transition:all .3s}
+.mob-menu{display:none;position:fixed;top:80px;left:0;right:0;background:rgba(246,244,241,.98);backdrop-filter:blur(24px);padding:28px 32px;border-bottom:1px solid var(--border);z-index:999;flex-direction:column;gap:18px}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;padding:4px 0;font-weight:700}
+.mob-menu a:hover{color:var(--accent)}
+
+/* FLOATING WA */
+.wa-fl{position:fixed;bottom:30px;right:30px;z-index:500;width:56px;height:56px;border-radius:50%;background:#25D366;border:none;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 26px rgba(37,211,102,.5);transition:all .3s;animation:wabounce 3s ease-in-out 2s infinite}
+.wa-fl:hover{transform:scale(1.12);animation:none}
+.wa-fl svg{width:26px;height:26px;fill:#fff}
+.wa-tip{position:absolute;right:66px;white-space:nowrap;background:var(--surface2);color:var(--text);font-size:11.5px;padding:7px 13px;border-radius:3px;border:1px solid var(--border);opacity:0;pointer-events:none;transition:opacity .3s;font-family:'Barlow',sans-serif}
+.wa-fl:hover .wa-tip{opacity:1}
+@keyframes wabounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* ══ ARTICLE HERO ══ */
+.article-hero{padding-top:120px;background:var(--surface);position:relative;z-index:2}
+.article-hero__img-wrap{width:100%;max-height:520px;overflow:hidden;position:relative}
+.article-hero__img{width:100%;max-height:520px;object-fit:cover;display:block;filter:brightness(.82)}
+.article-hero__img-skeleton{
+  width:100%;height:420px;
+  background:linear-gradient(90deg,var(--surface2) 25%,var(--surface3) 50%,var(--surface2) 75%);
+  background-size:200% 100%;animation:shimmer 1.4s infinite;
+}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+.article-hero__meta-bar{max-width:880px;margin:0 auto;padding:44px 60px 0}
+
+/* Breadcrumb */
+.article-breadcrumb{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;color:var(--muted);margin-bottom:20px;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  letter-spacing:2px;text-transform:uppercase;font-weight:600;
+}
+.article-breadcrumb a{color:var(--accent);text-decoration:none;transition:color .2s}
+.article-breadcrumb a:hover{color:var(--fire)}
+.article-breadcrumb span{opacity:.5}
+
+/* Category badge — matches .bl-tag */
+.article-category{
+  display:inline-block;
+  background:var(--accent);color:#fff;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  padding:4px 12px;border-radius:2px;margin-bottom:20px;
+}
+
+/* Title */
+.article-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.8rem,6vw,5rem);
+  line-height:.95;letter-spacing:2px;color:var(--text);
+  margin-bottom:24px;
+}
+
+/* Meta info bar */
+.article-info{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;font-weight:600;
+  padding-bottom:32px;border-bottom:1px solid var(--border);
+}
+.article-info-dot{width:3px;height:3px;border-radius:50%;background:var(--border2);flex-shrink:0}
+
+/* ══ ARTICLE CONTENT ══ */
+.article-layout{max-width:880px;margin:0 auto;padding:56px 60px 100px;position:relative;z-index:2}
+
+/* Prose */
+.article-prose{
+  font-family:'Lora',Georgia,serif;
+  font-size:1.06rem;line-height:1.9;
+  color:var(--text);
+}
+.article-prose h1,.article-prose h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(1.6rem,3.5vw,2.6rem);
+  letter-spacing:2px;color:var(--text);line-height:1;
+  margin:2.4em 0 .75em;
+}
+.article-prose h3{
+  font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;
+  letter-spacing:1px;color:var(--text);text-transform:uppercase;
+  margin:2em 0 .6em;
+}
+.article-prose h4{
+  font-family:'Barlow Condensed',sans-serif;font-size:.9rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:3px;color:var(--accent);
+  margin:1.6em 0 .5em;
+}
+.article-prose p{margin-bottom:1.5em;color:var(--muted)}
+.article-prose a{color:var(--accent);text-decoration:underline;text-decoration-thickness:1px}
+.article-prose a:hover{color:var(--fire)}
+.article-prose strong{color:var(--text);font-weight:600}
+.article-prose em{font-style:italic}
+.article-prose ul,.article-prose ol{padding-left:1.6em;margin-bottom:1.5em}
+.article-prose li{margin-bottom:.5em;color:var(--muted)}
+.article-prose blockquote{
+  border-left:3px solid var(--accent);
+  padding:18px 24px;margin:2em 0;
+  background:var(--surface2);border-radius:0 2px 2px 0;
+}
+.article-prose blockquote p{margin:0;color:var(--muted);font-style:italic}
+.article-prose img{width:100%;border-radius:2px;margin:2em 0;display:block;filter:brightness(.88)}
+.article-prose hr{border:none;border-top:1px solid var(--border);margin:2.5em 0}
+.article-prose pre{background:var(--surface3);border:1px solid var(--border);border-radius:2px;padding:20px;overflow-x:auto;margin-bottom:1.5em;font-size:.88rem}
+.article-prose code{font-size:.88em;background:var(--surface2);padding:2px 6px;border-radius:2px;color:var(--accent)}
+.article-prose table{width:100%;border-collapse:collapse;margin-bottom:1.5em;font-family:'Barlow',sans-serif;font-size:.9rem}
+.article-prose th{background:var(--surface2);padding:10px 14px;text-align:left;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;border-bottom:2px solid var(--border2)}
+.article-prose td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--muted)}
+
+/* Divider line with icon */
+.article-divider{
+  display:flex;align-items:center;gap:16px;
+  margin:48px 0;
+}
+.article-divider::before,.article-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.article-divider-icon{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(139,94,60,.1);border:1px solid rgba(139,94,60,.2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.article-divider-icon svg{width:14px;height:14px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* Skeleton prose */
+.prose-skeleton .skel-line{
+  height:14px;border-radius:2px;margin-bottom:14px;
+  background:linear-gradient(90deg,var(--surface2) 25%,var(--surface3) 50%,var(--surface2) 75%);
+  background-size:200% 100%;animation:shimmer 1.4s infinite;
+}
+.prose-skeleton .skel-line--md{width:72%}
+.prose-skeleton .skel-line--sm{width:48%}
+.prose-skeleton .skel-line--h{height:28px;width:60%;margin-bottom:22px}
+
+/* Article footer bar */
+.article-footer-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:40px;margin-top:56px;
+  border-top:1px solid var(--border);
+  flex-wrap:wrap;gap:18px;
+}
+
+/* Back button */
+.btn-back{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;
+  color:var(--text);text-decoration:none;
+  background:transparent;border:1px solid var(--border2);
+  padding:12px 22px;border-radius:2px;
+  transition:all .3s;
+}
+.btn-back:hover{border-color:var(--accent);color:var(--accent);transform:translateX(-3px)}
+.btn-back svg{flex-shrink:0}
+
+/* Share bar */
+.share-bar{display:flex;align-items:center;gap:10px}
+.share-label{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.share-btn{
+  width:36px;height:36px;border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--surface2);border:1px solid var(--border);
+  color:var(--muted);transition:all .3s;
+  text-decoration:none;
+}
+.share-btn svg{width:15px;height:15px}
+.share-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff;transform:translateY(-2px)}
+
+/* Related articles */
+.related-section{
+  background:var(--bg2);
+  padding:80px 60px;
+  position:relative;z-index:2;
+}
+.related-inner{max-width:1160px;margin:0 auto}
+.section-ey{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;font-weight:700;display:flex;align-items:center;gap:12px}
+.section-ey::before{content:'';width:30px;height:1px;background:var(--accent)}
+.section-st{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:2px;color:var(--text);margin-bottom:40px;line-height:.95}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+
+/* 404 */
+.article-not-found{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:60vh;text-align:center;padding:80px 24px;
+  position:relative;z-index:2;
+}
+.article-not-found h2{
+  font-family:'Bebas Neue',sans-serif;font-size:8rem;letter-spacing:4px;
+  color:var(--accent);line-height:1;margin-bottom:16px;opacity:.4;
+}
+.article-not-found p{font-size:14px;color:var(--muted);margin-bottom:28px}
+.btn-back-home{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent);color:#fff;
+  padding:14px 28px;border-radius:2px;
+  font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;
+  text-decoration:none;transition:all .3s;
+}
+.btn-back-home:hover{background:var(--fire);transform:translateY(-2px)}
+
+/* FOOTER */
+footer{background:var(--bg);color:var(--text);padding:64px 60px 30px;border-top:1px solid var(--border);position:relative;z-index:2}
+.ft-grid2{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:52px}
+.ft-logo-img{height:100px;width:auto;display:block;margin-bottom:12px;transition:transform .3s ease}
+.ft-logo-img:hover{transform:translateY(-2px)}
+.ft-about{font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:22px}
+.ft-col-t{font-family:'Barlow Condensed',sans-serif;font-size:20px;letter-spacing:4px;text-transform:uppercase;color:var(--text);font-weight:700;margin-bottom:16px}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.ft-links a{font-size:18px;color:var(--muted);text-decoration:none;transition:color .2s}
+.ft-links a:hover{color:orange}
+.ft-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:26px;border-top:1px solid rgba(0,0,0,.06);font-size:11px;color:rgba(0,0,0,.4);flex-wrap:wrap;gap:12px}
+.ft-socials{display:flex;gap:14px}
+.ft-socials a{color:rgba(0,0,0,.3);transition:color .2s;display:flex;align-items:center;text-decoration:none}
+.ft-socials a svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ft-socials a:hover{color:var(--accent)}
+.ft-wa{background:var(--accent);color:#fff;padding:9px 20px;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:9.5px;letter-spacing:2px;text-transform:uppercase;font-weight:700;border:none;display:flex;align-items:center;gap:8px;transition:all .3s}
+.ft-wa:hover{background:var(--fire)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  nav{padding:0 28px}
+  .article-hero__meta-bar{padding:36px 28px 0}
+  .article-layout{padding:48px 28px 80px}
+  .related-section{padding:60px 28px}
+  .related-grid{grid-template-columns:1fr 1fr}
+  .ft-grid2{grid-template-columns:1fr 1fr}
+  footer{padding:64px 28px 30px}
+}
+@media(max-width:768px){
+  .nl{display:none}.ham{display:flex}
+  .article-title{font-size:clamp(2rem,8vw,3rem)}
+  .related-grid{grid-template-columns:1fr}
+  .article-footer-bar{flex-direction:column;align-items:flex-start}
+  .ft-grid2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<canvas id="spark-bg"></canvas>
+<div id="heat-gauge"><div id="heat-fill"></div></div>
+<div id="heat-icon">🔥</div>
+<canvas id="click-cv"></canvas>
+<div id="prog"></div>
+
+<!-- Floating WhatsApp -->
+<button class="wa-fl" onclick="window.open('https://wa.me/919XXXXXXXXX','_blank')" aria-label="WhatsApp">
+  <span class="wa-tip">Chat with us!</span>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</button>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="logo-wrap">
+    <img src="spark-shiled.png" class="logo-default" alt="SparkShield">
+    <img src="spark-shile-1.png" class="logo-scrolled" alt="SparkShield">
+  </div>
+  <div class="nl">
+    <a href="index.html">Products</a>
+    <a href="index.html#knowledge">Science</a>
+    <a href="index.html#features">Features</a>
+    <a href="index.html#gallery">Gallery</a>
+    <a href="blog.html" class="active">Blog</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+  <div class="nr">
+    <button class="nav-cta" onclick="window.open('https://wa.me/919XXXXXXXXX','_blank')">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Get Quote
+    </button>
+    <button class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="index.html" onclick="closeMob()">Products</a>
+  <a href="index.html#knowledge" onclick="closeMob()">Science</a>
+  <a href="index.html#features" onclick="closeMob()">Features</a>
+  <a href="index.html#gallery" onclick="closeMob()">Gallery</a>
+  <a href="blog.html" onclick="closeMob()">Blog</a>
+  <a href="index.html#contact" onclick="closeMob()">Contact</a>
+</div>
+
+<!-- ARTICLE ROOT -->
+<main id="article-root">
+  <!-- Skeleton while loading -->
+  <div class="article-hero">
+    <div class="article-hero__img-skeleton"></div>
+    <div class="article-hero__meta-bar">
+      <div style="height:12px;width:200px;border-radius:2px;background:linear-gradient(90deg,var(--surface2) 25%,var(--surface3) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;margin-bottom:20px"></div>
+      <div style="height:18px;width:100px;border-radius:2px;background:linear-gradient(90deg,var(--surface2) 25%,var(--surface3) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;margin-bottom:22px"></div>
+      <div style="height:64px;width:70%;border-radius:2px;background:linear-gradient(90deg,var(--surface2) 25%,var(--surface3) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;margin-bottom:24px"></div>
+      <div style="height:12px;width:300px;border-radius:2px;background:linear-gradient(90deg,var(--surface2) 25%,var(--surface3) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;padding-bottom:32px"></div>
+    </div>
+  </div>
+  <div class="article-layout">
+    <div class="prose-skeleton">
+      <div class="skel-line skel-line--h"></div>
+      <div class="skel-line"></div>
+      <div class="skel-line skel-line--md"></div>
+      <div class="skel-line"></div>
+      <div class="skel-line skel-line--sm"></div>
+      <div class="skel-line"></div>
+      <div class="skel-line skel-line--md"></div>
+      <div class="skel-line"></div>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid2">
+    <div>
+      <img src="spark-shiled.png" class="ft-logo-img" alt="SparkShield Logo">
+      <div class="ft-about">India's trusted manufacturer of vermiculite-coated welding blankets for industrial, marine, and construction applications. Quality that stands the heat.</div>
+      <button class="ft-wa" onclick="window.open('https://wa.me/919XXXXXXXXX','_blank')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chat on WhatsApp
+      </button>
+    </div>
+    <div>
+      <div class="ft-col-t">Products</div>
+      <ul class="ft-links">
+        <li><a href="index.html#products">SSB24 Standard</a></li>
+        <li><a href="index.html#products">SSB30 Premium</a></li>
+        <li><a href="index.html#contact">Custom Sizes</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft-col-t">Company</div>
+      <ul class="ft-links">
+        <li><a href="index.html#knowledge">About Vermiculite</a></li>
+        <li><a href="index.html#features">Why Spark Shield</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="index.html#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft-col-t">Industries</div>
+      <ul class="ft-links">
+        <li><a href="index.html#usage">Shipyards</a></li>
+        <li><a href="index.html#usage">Steel Construction</a></li>
+        <li><a href="index.html#usage">Automotive</a></li>
+        <li><a href="index.html#usage">Pipeline</a></li>
+        <li><a href="index.html#usage">Defence</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div>© 2025 Spark Shield. All rights reserved. Made in India 🇮🇳</div>
+    <div class="ft-socials">
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/blog-config.js"></script>
+<script src="js/blog-ui.js"></script>
+<script>
+/* ── HEAT GAUGE + PROGRESS ── */
+const pb=document.getElementById('prog');
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY,d=document.body.scrollHeight-window.innerHeight;
+  const pct=Math.min(100,(s/d)*100);
+  document.getElementById('heat-fill').style.height=pct+'%';
+  document.getElementById('heat-icon').style.top=(50+(pct-50)*.3)+'%';
+  document.getElementById('nav').classList.toggle('scrolled',s>60);
+  pb.style.width=pct+'%';
+},{passive:true});
+
+/* ── CLICK SPARKS ── */
+const cc=document.getElementById('click-cv'),cx=cc.getContext('2d');
+function rsz(){cc.width=window.innerWidth;cc.height=window.innerHeight}rsz();
+window.addEventListener('resize',rsz);
+let sps=[];
+document.addEventListener('click',e=>{
+  const cols=['#FF6A00','#FFA500','#FFD700','#FF4500','#FF8C00'];
+  for(let i=0;i<14;i++){const a=Math.PI*2/14*i+Math.random()*.4,sp=2+Math.random()*5;sps.push({x:e.clientX,y:e.clientY,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-2,life:1,dc:.018+Math.random()*.014,sz:1.5+Math.random()*3,col:cols[i%5]})}
+});
+(function animS(){cx.clearRect(0,0,cc.width,cc.height);sps=sps.filter(s=>s.life>0);sps.forEach(s=>{s.x+=s.vx;s.y+=s.vy;s.vy+=.14;s.life-=s.dc;cx.globalAlpha=s.life;cx.fillStyle=s.col;cx.beginPath();cx.arc(s.x,s.y,s.sz,0,Math.PI*2);cx.fill()});cx.globalAlpha=1;requestAnimationFrame(animS)})();
+
+/* ── AMBIENT SPARKS ── */
+(function(){const c=document.getElementById('spark-bg'),ctx=c.getContext('2d');c.width=window.innerWidth;c.height=window.innerHeight;window.addEventListener('resize',()=>{c.width=window.innerWidth;c.height=window.innerHeight;init()});let pts=[];function init(){pts=[];for(let i=0;i<50;i++)pts.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.4,vy:-.3-Math.random()*.5,life:Math.random(),maxLife:.6+Math.random()*.4,size:.8+Math.random()*1.8,color:['#FFD700','#FF8C00','#C8914F'][Math.floor(Math.random()*3)]})}init();function draw(){ctx.clearRect(0,0,c.width,c.height);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.life-=.004;if(p.life<=0){p.x=Math.random()*c.width;p.y=c.height+10;p.life=p.maxLife}const a=(p.life/p.maxLife)*0.55;ctx.globalAlpha=a;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fill()});ctx.globalAlpha=1;requestAnimationFrame(draw)}draw()})();
+
+/* ── MOBILE MENU ── */
+document.getElementById('ham').addEventListener('click',function(){
+  const m=document.getElementById('mobMenu');m.classList.toggle('open');
+  const sp=this.querySelectorAll('span');
+  if(m.classList.contains('open')){sp[0].style.transform='rotate(45deg) translate(5px,5px)';sp[1].style.opacity='0';sp[2].style.transform='rotate(-45deg) translate(5px,-5px)'}
+  else{sp[0].style.transform='';sp[1].style.opacity='';sp[2].style.transform=''}
+});
+function closeMob(){document.getElementById('mobMenu').classList.remove('open');document.querySelectorAll('.ham span').forEach(s=>{s.style.transform='';s.style.opacity=''})}
+
+/* ── LOAD ARTICLE ── */
+async function loadArticle(){
+  const params=new URLSearchParams(window.location.search);
+  const slug=params.get('slug');
+  if(!slug){renderNotFound('No article specified.');return}
+  try{
+    const blogs=await fetchBlogs({slug});
+    if(!blogs||!blogs.length){renderNotFound('Article not found.');return}
+    renderArticle(blogs[0]);
+  }catch(err){
+    console.error('[SparkShield BlogDetails]',err);
+    renderNotFound('Failed to load article. Please try again.');
+  }
+}
+
+function renderArticle(blog){
+  const imageUrl=getBlogImageUrl(blog.featured_image);
+  const date=formatDate(blog.created_at);
+  const timeToRead=readingTime(blog.content);
+  const pageTitle=blog.meta_title||blog.title;
+  setPageMeta(pageTitle+' – Spark Shield Blog',blog.meta_description||'');
+  if(imageUrl){
+    let ogImg=document.querySelector('meta[property="og:image"]');
+    if(!ogImg){ogImg=document.createElement('meta');ogImg.setAttribute('property','og:image');document.head.appendChild(ogImg)}
+    ogImg.setAttribute('content',imageUrl);
+  }
+
+  document.getElementById('article-root').innerHTML=`
+    <article>
+      <header class="article-hero">
+        ${imageUrl
+          ? `<div class="article-hero__img-wrap"><img src="${imageUrl}" alt="${blog.title}" class="article-hero__img" loading="eager"></div>`
+          : `<div style="height:120px;background:var(--surface2)"></div>`}
+        <div class="article-hero__meta-bar">
+          <nav class="article-breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span>›</span>
+            <a href="blog.html">Blog</a>
+            <span>›</span>
+            <span style="color:var(--text)">${blog.title}</span>
+          </nav>
+          ${blog.category?`<span class="article-category">${blog.category}</span>`:''}
+          <h1 class="article-title">${blog.title}</h1>
+          <div class="article-info">
+            <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>${timeToRead}</span>
+            <span class="article-info-dot"></span>
+            <span>${date}</span>
+            ${blog.author?`<span class="article-info-dot"></span><span>By ${blog.author}</span>`:''}
+          </div>
+        </div>
+      </header>
+
+      <div class="article-layout">
+        <div class="article-prose" id="article-prose">${blog.content||''}</div>
+
+        <div class="article-divider">
+          <div class="article-divider-icon">
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+        </div>
+
+        <footer class="article-footer-bar">
+          <a href="blog.html" class="btn-back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            All Articles
+          </a>
+          <div class="share-bar">
+            <span class="share-label">Share</span>
+            <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(blog.title)}" target="_blank" rel="noopener noreferrer" class="share-btn" aria-label="Share on X/Twitter">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://wa.me/?text=${encodeURIComponent(blog.title+' '+window.location.href)}" target="_blank" rel="noopener noreferrer" class="share-btn" aria-label="Share on WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+            </a>
+            <button class="share-btn" onclick="copyLink(event)" aria-label="Copy link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </button>
+          </div>
+        </footer>
+      </div>
+    </article>
+
+    <!-- RELATED ARTICLES -->
+    <section class="related-section" id="related-sec" style="display:none">
+      <div class="related-inner">
+        <div class="section-ey">More From The Forge</div>
+        <h2 class="section-st">RELATED ARTICLES</h2>
+        <div class="related-grid" id="related-grid"></div>
+      </div>
+    </section>
+  `;
+
+  /* Load related articles */
+  loadRelated(blog.slug, blog.category);
+}
+
+async function loadRelated(currentSlug, category){
+  try{
+    const blogs=await fetchBlogs({limit:6});
+    const related=blogs.filter(b=>b.slug!==currentSlug).slice(0,3);
+    if(!related.length)return;
+    const sec=document.getElementById('related-sec');
+    const grid=document.getElementById('related-grid');
+    if(sec&&grid){
+      grid.innerHTML=related.map(b=>buildBlogCard(b)).join('');
+      sec.style.display='block';
+    }
+  }catch(e){/* silently skip related if fails */}
+}
+
+function renderNotFound(msg){
+  document.title='Not Found – Spark Shield Blog';
+  document.getElementById('article-root').innerHTML=`
+    <div class="article-not-found">
+      <h2>404</h2>
+      <p>${msg}</p>
+      <a href="blog.html" class="btn-back-home">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Blog
+      </a>
+    </div>
+  `;
+}
+
+function copyLink(event){
+  navigator.clipboard.writeText(window.location.href).then(()=>{
+    const btn=event.currentTarget;
+    const orig=btn.innerHTML;
+    btn.style.background='var(--accent)';btn.style.color='#fff';btn.style.borderColor='var(--accent)';
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>';
+    setTimeout(()=>{btn.style.background='';btn.style.color='';btn.style.borderColor='';btn.innerHTML=orig},2000);
+  });
+}
+
+loadArticle();
+</script>
+</body>
+</html>

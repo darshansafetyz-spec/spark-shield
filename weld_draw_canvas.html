@@ -1,0 +1,368 @@
+
+<style>
+  #wc-wrap { background: #0a0a0a; border-radius: 8px; overflow: hidden; font-family: sans-serif; }
+  #weld-canvas { display: block; width: 100%; height: 420px; touch-action: none; }
+  #wc-toolbar {
+    display: flex; align-items: center; gap: 10px; padding: 10px 16px;
+    background: #111; border-bottom: 1px solid rgba(139,94,60,.3); flex-wrap: wrap;
+  }
+  #wc-toolbar button {
+    background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15);
+    color: #ccc; padding: 6px 14px; border-radius: 4px; font-size: 11px;
+    letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all .2s;
+  }
+  #wc-toolbar button:hover { background: rgba(232,98,10,.2); border-color: #E8620A; color: #fff; }
+  #wc-toolbar button.active { background: rgba(232,98,10,.3); border-color: #FF8C00; color: #FFD700; }
+  .wc-sep { width: 1px; height: 20px; background: rgba(255,255,255,.1); }
+  #wc-hint { font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,.2); text-align: center; padding: 8px; background: #0a0a0a; }
+  #wc-mode-label { font-size: 10px; letter-spacing: 2px; color: rgba(255,140,0,.6);
+    text-transform: uppercase; margin-left: auto; }
+</style>
+
+<div id="wc-wrap">
+  <div id="wc-toolbar">
+    <button id="btn-draw" class="active" onclick="setMode('draw')">✏ Draw</button>
+    <button id="btn-erase" onclick="setMode('erase')">◻ Erase</button>
+    <div class="wc-sep"></div>
+    <button onclick="clearAll()">⟳ Clear</button>
+    <span id="wc-mode-label">DRAW MODE</span>
+  </div>
+  <canvas id="weld-canvas"></canvas>
+  <div id="wc-hint">Draw / write anything — it glows then fades like cooling metal ↑</div>
+</div>
+
+<script>
+(function(){
+  const canvas = document.getElementById('weld-canvas');
+  const ctx = canvas.getContext('2d');
+
+  function resize(){
+    const prev = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight || 420;
+    ctx.putImageData(prev, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  let mode = 'draw';
+  let mouse = { x: canvas.width/2, y: canvas.height/2, active: false, drawing: false };
+  let particles = [];
+  let spatter = [];
+  let time = 0;
+  let lastX = null, lastY = null;
+
+  window.setMode = function(m) {
+    mode = m;
+    document.getElementById('btn-draw').classList.toggle('active', m === 'draw');
+    document.getElementById('btn-erase').classList.toggle('active', m === 'erase');
+    document.getElementById('wc-mode-label').textContent = m === 'draw' ? 'DRAW MODE' : 'ERASE MODE';
+  };
+
+  window.clearAll = function() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawStrokes = [];
+    particles = [];
+    spatter = [];
+  };
+
+  function getPos(e) {
+    const r = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / r.width;
+    const scaleY = canvas.height / r.height;
+    if (e.touches) {
+      return {
+        x: (e.touches[0].clientX - r.left) * scaleX,
+        y: (e.touches[0].clientY - r.top) * scaleY
+      };
+    }
+    return {
+      x: (e.clientX - r.left) * scaleX,
+      y: (e.clientY - r.top) * scaleY
+    };
+  }
+
+  canvas.addEventListener('mousedown', e => {
+    const p = getPos(e);
+    mouse.x = p.x; mouse.y = p.y;
+    mouse.active = true; mouse.drawing = true;
+    lastX = p.x; lastY = p.y;
+    if (mode === 'draw') startStroke(p.x, p.y);
+  });
+  canvas.addEventListener('mousemove', e => {
+    const p = getPos(e);
+    mouse.x = p.x; mouse.y = p.y;
+    if (mouse.drawing) {
+      if (mode === 'draw') addToStroke(p.x, p.y);
+      else doErase(p.x, p.y);
+    }
+    lastX = p.x; lastY = p.y;
+  });
+  canvas.addEventListener('mouseup', () => { mouse.drawing = false; currentStroke = null; });
+  canvas.addEventListener('mouseleave', () => { mouse.active = false; mouse.drawing = false; currentStroke = null; });
+  canvas.addEventListener('mouseenter', () => mouse.active = true);
+
+  canvas.addEventListener('touchstart', e => {
+    e.preventDefault();
+    const p = getPos(e);
+    mouse.x = p.x; mouse.y = p.y;
+    mouse.active = true; mouse.drawing = true;
+    lastX = p.x; lastY = p.y;
+    if (mode === 'draw') startStroke(p.x, p.y);
+  }, { passive: false });
+  canvas.addEventListener('touchmove', e => {
+    e.preventDefault();
+    const p = getPos(e);
+    mouse.x = p.x; mouse.y = p.y;
+    if (mouse.drawing) {
+      if (mode === 'draw') addToStroke(p.x, p.y);
+      else doErase(p.x, p.y);
+    }
+  }, { passive: false });
+  canvas.addEventListener('touchend', () => { mouse.drawing = false; currentStroke = null; });
+
+  let drawStrokes = [];
+  let currentStroke = null;
+
+  function startStroke(x, y) {
+    currentStroke = { points: [{x, y}], life: 1.0, born: time };
+    drawStrokes.push(currentStroke);
+  }
+
+  function addToStroke(x, y) {
+    if (!currentStroke) startStroke(x, y);
+    const last = currentStroke.points[currentStroke.points.length - 1];
+    const dx = x - last.x, dy = y - last.y;
+    if (dx*dx + dy*dy > 4) {
+      currentStroke.points.push({x, y});
+      spawnSpark(x, y);
+      spawnSpatter(x, y);
+    }
+  }
+
+  function doErase(x, y) {
+    const r = 28;
+    drawStrokes = drawStrokes.filter(s => {
+      return !s.points.some(p => {
+        const dx = p.x - x, dy = p.y - y;
+        return dx*dx + dy*dy < r*r;
+      });
+    });
+  }
+
+  function spawnSpark(x, y) {
+    const count = 4 + Math.floor(Math.random()*4);
+    for(let i=0;i<count;i++){
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 1.2 + Math.random() * 4;
+      particles.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 1.5,
+        life: 1,
+        decay: 0.025 + Math.random() * 0.04,
+        size: 0.6 + Math.random() * 1.8,
+        color: ['#FFD700','#FF8C00','#FF4500','#FFA500','#FFFFFF'][Math.floor(Math.random()*5)]
+      });
+    }
+  }
+
+  function spawnSpatter(x, y) {
+    if(Math.random() > 0.06) return;
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 2 + Math.random() * 6;
+    spatter.push({
+      x, y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed - 2,
+      life: 1,
+      decay: 0.008 + Math.random() * 0.012,
+      size: 1.5 + Math.random() * 3,
+      color: '#FF4500'
+    });
+  }
+
+  function drawArc(x1,y1,x2,y2,jagged,alpha){
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 1.5;
+    ctx.shadowBlur = 18;
+    ctx.shadowColor = '#88CCFF';
+    ctx.beginPath();
+    ctx.moveTo(x1,y1);
+    const steps = 8;
+    for(let i=1;i<=steps;i++){
+      const t = i/steps;
+      const nx = x1 + (x2-x1)*t + (Math.random()-0.5)*jagged;
+      const ny = y1 + (y2-y1)*t + (Math.random()-0.5)*jagged;
+      ctx.lineTo(nx, ny);
+    }
+    ctx.stroke();
+    ctx.globalAlpha = alpha * 0.3;
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = '#44AAFF';
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawArcCore(x, y){
+    const g = ctx.createRadialGradient(x,y,0,x,y,18);
+    g.addColorStop(0,'rgba(255,255,255,1)');
+    g.addColorStop(0.15,'rgba(255,240,180,.95)');
+    g.addColorStop(0.4,'rgba(255,140,0,.6)');
+    g.addColorStop(1,'rgba(255,80,0,0)');
+    ctx.save();
+    ctx.globalAlpha = 0.92;
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(x,y,18,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+
+    const g2 = ctx.createRadialGradient(x,y,0,x,y,60);
+    g2.addColorStop(0,'rgba(255,180,50,.35)');
+    g2.addColorStop(1,'rgba(255,80,0,0)');
+    ctx.save();
+    ctx.globalAlpha = 0.5 + 0.3*Math.sin(time*0.3);
+    ctx.fillStyle = g2;
+    ctx.beginPath();
+    ctx.arc(x,y,60,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawHaze(x, y){
+    const g = ctx.createRadialGradient(x,y,0,x,y,160);
+    g.addColorStop(0,'rgba(255,100,20,0.06)');
+    g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.save();
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(x,y,160,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawAllStrokes() {
+    const now = time;
+    const FADE_START = 180;
+    const FADE_DURATION = 80;
+
+    drawStrokes = drawStrokes.filter(s => s.life > 0);
+
+    for (const s of drawStrokes) {
+      const age = now - s.born;
+      if (age > FADE_START) {
+        s.life -= 1 / FADE_DURATION;
+        if (s.life < 0) s.life = 0;
+      }
+
+      if (s.points.length < 2) continue;
+      const a = Math.min(1, s.life);
+      if (a <= 0) continue;
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'source-over';
+
+      ctx.strokeStyle = `rgba(255,140,0,${a * 0.9})`;
+      ctx.lineWidth = 4;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.shadowBlur = 14;
+      ctx.shadowColor = `rgba(255,80,0,${a})`;
+      ctx.globalAlpha = a;
+      ctx.beginPath();
+      ctx.moveTo(s.points[0].x, s.points[0].y);
+      for (let i = 1; i < s.points.length; i++) {
+        const prev = s.points[i-1];
+        const curr = s.points[i];
+        const mx = (prev.x + curr.x) / 2;
+        const my = (prev.y + curr.y) / 2;
+        ctx.quadraticCurveTo(prev.x, prev.y, mx, my);
+      }
+      ctx.stroke();
+
+      ctx.strokeStyle = `rgba(255,220,100,${a * 0.5})`;
+      ctx.lineWidth = 1.5;
+      ctx.shadowBlur = 6;
+      ctx.shadowColor = `rgba(255,200,0,${a * 0.6})`;
+      ctx.stroke();
+
+      ctx.restore();
+    }
+  }
+
+  function loop(){
+    time++;
+
+    ctx.fillStyle = 'rgba(10,10,10,0.28)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    drawAllStrokes();
+
+    if (mouse.active && mouse.drawing && mode === 'draw') {
+      drawHaze(mouse.x, mouse.y);
+
+      if (Math.random() > 0.35) {
+        const ex = mouse.x + (Math.random()-0.5)*36;
+        const ey = mouse.y + (Math.random()-0.5)*36;
+        drawArc(mouse.x, mouse.y, ex, ey, 12, 0.5+Math.random()*0.5);
+      }
+
+      drawArcCore(mouse.x, mouse.y);
+    }
+
+    if (mode === 'erase' && mouse.drawing) {
+      ctx.save();
+      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+      ctx.lineWidth = 56;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.arc(mouse.x, mouse.y, 28, 0, Math.PI*2);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    particles = particles.filter(p => p.life > 0);
+    for(const p of particles){
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.18;
+      p.vx *= 0.97;
+      p.life -= p.decay;
+      ctx.save();
+      ctx.globalAlpha = p.life;
+      ctx.fillStyle = p.color;
+      ctx.shadowBlur = 4;
+      ctx.shadowColor = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    spatter = spatter.filter(s => s.life > 0);
+    for(const s of spatter){
+      s.x += s.vx;
+      s.y += s.vy;
+      s.vy += 0.25;
+      s.vx *= 0.96;
+      s.life -= s.decay;
+      ctx.save();
+      ctx.globalAlpha = s.life;
+      ctx.fillStyle = s.color;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = '#FF6600';
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+</script>
