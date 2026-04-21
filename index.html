@@ -704,7 +704,7 @@ footer {
           <div class="thermo-bulb"></div>
         </div>
         <div class="thermo-temp-display" id="thermoDisplay">1260<span>°C</span></div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.28);text-align:center;font-weight:600">Blanket Temperature Rating</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);text-align:center;font-weight:600">Blanket Temperature Rating</div>
       </div>
     </div>
   </div>
@@ -861,7 +861,7 @@ footer {
       <div class="gallery-item"><img src="https://images.pexels.com/photos/15888226/pexels-photo-15888226.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Steel" loading="lazy"><div class="gallery-item-label">Steel Construction</div></div>
       <div class="gallery-item"><img src="https://images.pexels.com/photos/3862132/pexels-photo-3862132.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Auto" loading="lazy" onerror="this.src='https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=600'"><div class="gallery-item-label">Automotive Workshop</div></div>
     </div>
-    <div style="text-align:center;margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600">← Hover to expand · Scroll to explore →</div>
+    <div style="text-align:center;margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text);font-weight:600">← Hover to expand · Scroll to explore →</div>
   </div>
 </section>
 
@@ -997,8 +997,8 @@ footer {
           <div class="fg"><label>Phone / WhatsApp *</label><input type="tel" id="cf-ph" placeholder="+91 98765 43210"></div>
         </div>
         <div class="frow">
-          <div class="fg"><label>Product *</label>
-            <select id="cf-pr">
+          <div class="fg"><label for="cf-pr">Product *</label>
+            <select id="cf-pr" aria-label="Select Product">
               <option value="SSB24 Standard">SSB24 Standard</option>
               <option value="SSB30 Premium" selected>SSB30 Premium</option>
               <option value="Custom Size">Custom Size</option>
@@ -1019,6 +1019,7 @@ footer {
   </div>
 </section>
 
+</main>
 <!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="con">
@@ -1081,7 +1082,7 @@ footer {
   <div style="max-width:900px;margin:0 auto 40px">
     <div class="ey" style="color:var(--gold);justify-content:center">Live Demo</div>
     <h2 class="st" style="color:#fff">FEEL THE ARC</h2>
-    <p class="sd" style="margin:0 auto;color:rgba(255,255,255,.45)">Move your cursor across the canvas to ignite a live arc weld simulation.</p>
+    <p class="sd" style="margin:0 auto;color:rgba(255,255,255,.75)">Move your cursor across the canvas to ignite a live arc weld simulation.</p>
   </div>
   <canvas id="weld-canvas" style="width:100%;max-width:100%;height:420px;border-radius:4px;border:1px solid rgba(139,94,60,.3);display:block;margin:0 auto;touch-action:none"></canvas>
   <div style="margin-top:18px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.2);font-weight:600">Move your cursor across the canvas ↑</div>
