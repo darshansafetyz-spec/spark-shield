@@ -17,11 +17,18 @@
 <link rel="manifest" href="/site.webmanifest">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta property="og:title" content="">
-<meta property="og:description" content="">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Spark Shield">
+<link rel="canonical" id="canonical-tag" href="https://www.sparkshield.co.in/blog-details">
+<meta name="description" content="" id="meta-desc">
+<meta property="og:title" content="" id="og-title">
+<meta property="og:description" content="" id="og-desc">
 <meta property="og:type" content="article">
-<meta property="og:image" content="">
+<meta property="og:site_name" content="Spark Shield">
+<meta property="og:image" content="https://www.sparkshield.co.in/spark-shiled.png" id="og-image">
+<meta property="og:url" content="" id="og-url">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.sparkshield.co.in/spark-shiled.png" id="tw-image">
 <title>Loading… – Spark Shield Blog</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -333,11 +340,11 @@ footer{background:var(--bg);color:var(--text);padding:64px 60px 30px;border-top:
   </div>
   <div class="nl">
     <a href="/">Products</a>
-    <a href="index.html#knowledge">Science</a>
-    <a href="index.html#features">Features</a>
-    <a href="index.html#gallery">Gallery</a>
-    <a href="/blog" class="active">Blog</a>
-    <a href="index.html#contact">Contact</a>
+    <a href="/#knowledge">Science</a>
+<a href="/#features">Features</a>
+<a href="/#gallery">Gallery</a>
+<a href="/blog" class="active">Blog</a>
+<a href="/#contact">Contact</a>
   </div>
   <div class="nr">
     <button class="nav-cta" onclick="window.open('https://wa.me/917567679456','_blank')">
@@ -349,11 +356,11 @@ footer{background:var(--bg);color:var(--text);padding:64px 60px 30px;border-top:
 </nav>
 <div class="mob-menu" id="mobMenu">
   <a href="/" onclick="closeMob()">Products</a>
-  <a href="index.html#knowledge" onclick="closeMob()">Science</a>
-  <a href="index.html#features" onclick="closeMob()">Features</a>
-  <a href="index.html#gallery" onclick="closeMob()">Gallery</a>
-  <a href="/blog" onclick="closeMob()">Blog</a>
-  <a href="index.html#contact" onclick="closeMob()">Contact</a>
+<a href="/#knowledge" onclick="closeMob()">Science</a>
+<a href="/#features" onclick="closeMob()">Features</a>
+<a href="/#gallery" onclick="closeMob()">Gallery</a>
+<a href="/blog" onclick="closeMob()">Blog</a>
+<a href="/#contact" onclick="closeMob()">Contact</a>
 </div>
 
 <!-- ARTICLE ROOT -->
@@ -487,7 +494,17 @@ function renderArticle(blog){
   const date=formatDate(blog.created_at);
   const timeToRead=readingTime(blog.content);
   const pageTitle=blog.meta_title||blog.title;
-  setPageMeta(pageTitle+' – Spark Shield Blog',blog.meta_description||'');
+  setPageMeta(pageTitle+' – Spark Shield Blog', blog.meta_description||'');
+const canon = document.getElementById('canonical-tag');
+if(canon) canon.setAttribute('href','https://www.sparkshield.co.in/blog-details?slug='+blog.slug);
+const ogUrl = document.getElementById('og-url');
+if(ogUrl) ogUrl.setAttribute('content','https://www.sparkshield.co.in/blog-details?slug='+blog.slug);
+const ogTitle = document.getElementById('og-title');
+if(ogTitle) ogTitle.setAttribute('content', pageTitle+' – Spark Shield Blog');
+const ogDesc = document.getElementById('og-desc');
+if(ogDesc) ogDesc.setAttribute('content', blog.meta_description||blog.excerpt||'');
+const metaDesc = document.getElementById('meta-desc');
+if(metaDesc) metaDesc.setAttribute('content', blog.meta_description||blog.excerpt||'');
   if(imageUrl){
     let ogImg=document.querySelector('meta[property="og:image"]');
     if(!ogImg){ogImg=document.createElement('meta');ogImg.setAttribute('property','og:image');document.head.appendChild(ogImg)}
