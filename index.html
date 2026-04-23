@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+(function(){
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='u'){e.preventDefault();return false}
+    if((e.ctrlKey||e.metaKey)&&e.shiftKey&&(e.key==='I'||e.key==='J'||e.key==='C')){e.preventDefault();return false}
+    if(e.key==='F12'){e.preventDefault();return false}
+  });
+  document.addEventListener('contextmenu',function(e){e.preventDefault()});
+})();
+</script>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -379,7 +389,7 @@ footer {
 }
 
 .ft-logo-img {
-  height: 100px; /* Adjust this height to fit your preference */
+  height: 180px; /* Adjust this height to fit your preference */
   width: auto;
   display: block;
   margin-bottom: 12px;
@@ -614,12 +624,12 @@ footer {
   <img src="spark-shile-1.png" class="logo-scrolled" alt="Logo">
 </div>
   <div class="nl">
-    <a href="#products" onclick="s2('products')">Products</a>
-    <a href="#knowledge" onclick="s2('knowledge')">Science</a>
-    <a href="#features" onclick="s2('features')">Features</a>
-    <a href="#gallery" onclick="s2('gallery')">Gallery</a>
-    <a href="blog.html">Blog</a>
-    <a href="#contact" onclick="s2('contact')">Contact</a>
+    <a href="#products" onclick="s2('products');return false">Products</a>
+<a href="#knowledge" onclick="s2('knowledge');return false">Science</a>
+<a href="#features" onclick="s2('features');return false">Features</a>
+<a href="#gallery" onclick="s2('gallery');return false">Gallery</a>
+<a href="/blog">Blog</a>
+<a href="#contact" onclick="s2('contact');return false">Contact</a>
   </div>
   <div class="nr">
     <button class="nav-cta" onclick="waMsg('general')">
@@ -630,12 +640,12 @@ footer {
   </div>
 </nav>
 <div class="mob-menu" id="mobMenu">
-  <a href="#products" onclick="closeMob();s2('products')">Products</a>
-  <a href="#knowledge" onclick="closeMob();s2('knowledge')">Science</a>
-  <a href="#features" onclick="closeMob();s2('features')">Features</a>
-  <a href="#gallery" onclick="closeMob();s2('gallery')">Gallery</a>
- <a href="blog.html">Blog</a>
-  <a href="#contact" onclick="closeMob();s2('contact')">Contact</a>
+  <a href="#products" onclick="closeMob();s2('products');return false">Products</a>
+<a href="#knowledge" onclick="closeMob();s2('knowledge');return false">Science</a>
+<a href="#features" onclick="closeMob();s2('features');return false">Features</a>
+<a href="#gallery" onclick="closeMob();s2('gallery');return false">Gallery</a>
+<a href="/blog">Blog</a>
+<a href="#contact" onclick="closeMob();s2('contact');return false">Contact</a>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -710,8 +720,179 @@ footer {
 </div>
 
 <!-- ═══ INTERACTIVE HEAT TEST ═══ -->
-<section class="heat-test-sec" id="heattest" style="padding:0">
-  <div class="heat-test-inner">
+<section id="heattest" style="padding:0;background:var(--bg)">
+<style>
+.ht-wrap{display:grid;grid-template-columns:1fr 400px;min-height:680px}
+.ht-left{padding:72px 56px;background:var(--text);display:flex;flex-direction:column;gap:0}
+.ht-left .ey{color:var(--gold)}.ht-left .ey::before{background:var(--gold)}
+.ht-left .st{color:var(--bg);font-size:clamp(28px,3.5vw,52px)}
+.ht-left .sd{color:rgba(246,244,241,.55);margin-bottom:22px}
+.ht-tbtns{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.ht-btn{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);border-radius:2px;cursor:pointer;transition:all .3s;text-align:left;width:100%}
+.ht-btn:hover{border-color:var(--fire);background:rgba(232,98,10,.12)}
+.ht-btn.on{border-color:var(--accent);background:rgba(200,145,79,.18)}
+.ht-btn-left{display:flex;flex-direction:column;gap:2px}
+.ht-btn-name{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;color:rgba(246,244,241,.9);letter-spacing:.5px}
+.ht-btn-code{font-size:11px;color:rgba(246,244,241,.4);letter-spacing:2px;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase}
+.ht-chip{font-family:'Black Ops One',sans-serif;font-size:24px;color:var(--fire);flex-shrink:0;transition:color .3s}
+.ht-btn.on .ht-chip{color:var(--gold)}
+.ht-prodcard{display:flex;gap:14px;align-items:flex-start;padding:20px;background:rgba(200,145,79,.08);border:1px solid rgba(200,145,79,.25);border-left:3px solid var(--accent);border-radius:2px;margin-top:4px}
+.ht-prodimg{width:88px;height:88px;border-radius:2px;object-fit:cover;flex-shrink:0;border:1px solid rgba(200,145,79,.3);background:#111}
+.ht-prodimg-ph{width:88px;height:88px;border-radius:2px;flex-shrink:0;border:1px solid rgba(200,145,79,.2);background:#111;display:flex;align-items:center;justify-content:center;font-family:'Black Ops One',sans-serif;font-size:11px;color:rgba(200,145,79,.4);text-align:center;letter-spacing:1px}
+.ht-prodinfo{flex:1;min-width:0}
+.ht-prodcode{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:3px;font-weight:700}
+.ht-prodname{font-family:'Black Ops One',sans-serif;font-size:17px;color:#fff;margin-bottom:4px;letter-spacing:.5px;line-height:1.2}
+.ht-proddesc{font-size:12px;color:rgba(246,244,241,.55);line-height:1.65;margin-bottom:10px}
+.ht-viewbtn{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:#fff;padding:8px 16px;border:none;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s}
+.ht-viewbtn:hover{background:var(--fire);transform:translateY(-1px)}
+.ht-right{background:#0f0f0f;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.ht-right::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 90%,rgba(232,98,10,.15) 0%,transparent 65%);animation:htPulse 3s ease-in-out infinite alternate;pointer-events:none}
+@keyframes htPulse{0%{opacity:.4}100%{opacity:1}}
+.ht-thermo-wrap{display:flex;flex-direction:column;align-items:center;gap:18px;position:relative;z-index:2}
+.ht-temp-disp{font-family:'Black Ops One',sans-serif;font-size:68px;color:#fff;letter-spacing:2px;line-height:1;text-align:center}
+.ht-temp-disp span{font-size:28px;color:var(--gold)}
+.ht-tube-row{display:flex;gap:28px;align-items:flex-end}
+.ht-tube{position:relative;width:54px;height:300px;background:rgba(255,255,255,.05);border-radius:27px 27px 0 0;border:2px solid rgba(255,255,255,.12);overflow:hidden;margin-bottom:0}
+.ht-fill{position:absolute;bottom:0;left:0;right:0;transition:height 1.4s cubic-bezier(.25,.46,.45,.94);border-radius:0}
+.ht-bulb{width:42px;height:42px;border-radius:50%;margin-top:-2px;box-shadow:0 0 18px rgba(255,100,0,.6);transition:background 1.4s}
+.ht-scale{display:flex;flex-direction:column;justify-content:space-between;height:300px;padding:0}
+.ht-tick{display:flex;align-items:center;gap:6px;cursor:pointer;padding:0 4px;border-radius:2px;transition:background .2s;height:calc(300px / 6)}
+.ht-tick:hover{background:rgba(200,145,79,.1)}
+.ht-tickline{width:10px;height:1px;background:rgba(255,255,255,.2);transition:background .3s}
+.ht-ticklbl{font-family:'Barlow Condensed',sans-serif;font-size:11px;color:rgba(255,255,255,.35);letter-spacing:1px;font-weight:600;transition:color .3s;white-space:nowrap}
+.ht-tick.on .ht-ticklbl{color:var(--gold);font-weight:800}
+.ht-tick.on .ht-tickline{background:var(--gold);width:14px}
+.ht-sublabel{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center;font-weight:600}
+@media(max-width:900px){.ht-wrap{grid-template-columns:1fr}.ht-right{min-height:340px}}
+@media(max-width:600px){.ht-left{padding:48px 24px}}
+</style>
+<div class="ht-wrap">
+  <div class="ht-left">
+    <div class="ey">Interactive Demo</div>
+    <h2 class="st">WHAT'S YOUR<br>HEAT RANGE?</h2>
+    <p class="sd">Select your working temperature — see the exact blanket engineered for that heat.</p>
+    <div class="ht-tbtns" id="htBtns"></div>
+    <div class="ht-prodcard" id="htCard">
+      <div class="ht-prodimg-ph" id="htImgWrap">IMG</div>
+      <div class="ht-prodinfo">
+        <div class="ht-prodcode" id="htCode"></div>
+        <div class="ht-prodname" id="htName"></div>
+        <div class="ht-proddesc" id="htDesc"></div>
+        <button class="ht-viewbtn" id="htViewBtn">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          View Product
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="ht-right">
+    <div class="ht-thermo-wrap">
+      <div class="ht-temp-disp"><span id="htTempNum">600</span><span>°C</span></div>
+      <div class="ht-tube-row" style="display:flex;gap:0;align-items:stretch">
+        <div style="display:flex;flex-direction:column;align-items:center;margin-right:16px">
+          <div class="ht-tube"><div class="ht-fill" id="htFill" style="height:4%"></div></div>
+          <div class="ht-bulb" id="htBulb" style="margin-top:6px"></div>
+        </div>
+        <div class="ht-scale" id="htScale" style="display:flex;flex-direction:column;justify-content:space-between;height:300px;padding:0;margin-bottom:42px"></div>
+      </div>
+      <div class="ht-sublabel">Peak heat resistance</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+var PRODS=[
+  {id:'grinding',name:'Grinding Blanket',code:'DSZFG2.0',temp:600,desc:'For grinding & cutting ops — resists abrasion and fine metal sparks at 600°C continuous. Lightweight, flexible, workshop-ready.',img:'DSZFG2.0.jpg'},
+  {id:'nonitchy',name:'Non-Itchy Welding Blanket',code:'DSZSFG1.0',temp:800,desc:'Skin-friendly silica-free formulation. Zero irritation for bare-handed operators. Full 800°C protection without compromise.',img:'DSZSFG1.0.jpg'},
+  {id:'black',name:'Black Welding Blanket',code:'DSZGFG2.0',temp:900,desc:'Carbon-infused black surface absorbs radiant heat and blocks spatter. Heavy steel fabrication and high-visibility environments.',img:'DSZGFG2.0.jpg'},
+  {id:'brown',name:'Brown Welding Blanket',code:'DSZMDWB2.5',temp:1000,desc:'Industry workhorse. Handles 1000°C sustained heat across shipyards, pipeline work, and structural fabrication.',img:'DSZMDWB2.5.jpg'},
+  {id:'white',name:'White Welding Blanket',code:'DSZCF3.0',temp:1100,desc:'High-purity ceramic-fibre composite for clean environments — pharmaceutical, food-grade, and precision manufacturing.',img:'DSZCF3.0.jpg'},
+  {id:'brownprem',name:'Brown Premium Welding Blanket',code:'DSZVCF3.0',temp:1200,desc:'Premium double-coated vermiculite with reinforced fibreglass mesh. Trusted by defence & heavy-duty shipyards.',img:'DSZVCF3.0.jpg'},
+  {id:'nonasb',name:'Non-Asbestos Welding Blanket',code:'DSZ96HS1.4',temp:1400,desc:'1400°C — the highest rating. 100% asbestos-free. Replaces legacy asbestos blankets in foundries, smelters and aerospace.',img:'DSZ96HS1.4.jpg'}
+];
+var TPCTS={600:6.7,800:22,900:37,1000:51.5,1100:66,1200:80,1400:100};
+var activeTemp=600;
+
+function getLiquid(t){
+  if(t<=600)return'linear-gradient(to top,#FFD700,#FFA500)';
+  if(t<=800)return'linear-gradient(to top,#FFD700,#FF8C00,#FF6600)';
+  if(t<=900)return'linear-gradient(to top,#FFD700,#FF8C00,#FF4500)';
+  if(t<=1000)return'linear-gradient(to top,#FFAA00,#FF5500,#FF2200)';
+  if(t<=1100)return'linear-gradient(to top,#FF8800,#FF3300,#CC0000)';
+  if(t<=1200)return'linear-gradient(to top,#FF6600,#DD0000,#AA0000)';
+  return'linear-gradient(to top,#FF2200,#AA0000,#660000)';
+}
+
+function buildScale(){
+  var sc=document.getElementById('htScale');
+  sc.innerHTML='';
+  [1400,1200,1100,1000,900,800,600].forEach(function(t){
+    var d=document.createElement('div');
+    d.className='ht-tick';d.id='htt'+t;
+    d.innerHTML='<div class="ht-tickline" id="htl'+t+'"></div><div class="ht-ticklbl" id="htlb'+t+'">'+t+'°C</div>';
+    d.onclick=function(){selectTemp(t)};
+    sc.appendChild(d);
+  });
+}
+
+function buildBtns(){
+  var wrap=document.getElementById('htBtns');
+  wrap.innerHTML='';
+  PRODS.forEach(function(p){
+    var b=document.createElement('button');
+    b.className='ht-btn'+(p.temp===activeTemp?' on':'');
+    b.id='htb'+p.temp;
+    b.innerHTML='<div class="ht-btn-left"><div class="ht-btn-name">'+p.name+'</div><div class="ht-btn-code">'+p.code+'</div></div><div class="ht-chip">'+p.temp+'°</div>';
+    b.onclick=function(){selectTemp(p.temp)};
+    wrap.appendChild(b);
+  });
+}
+
+function animNum(el,from,to,ms){
+  var start=null;
+  function step(ts){
+    if(!start)start=ts;
+    var prog=Math.min((ts-start)/ms,1);
+    var ease=prog<.5?2*prog*prog:-1+(4-2*prog)*prog;
+    el.textContent=Math.round(from+(to-from)*ease);
+    if(prog<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function selectTemp(t){
+  activeTemp=t;
+  var p=PRODS.find(function(x){return x.temp===t});
+  document.querySelectorAll('.ht-btn').forEach(function(b){b.classList.remove('on')});
+  var ab=document.getElementById('htb'+t);if(ab)ab.classList.add('on');
+  document.querySelectorAll('.ht-tick').forEach(function(tk){tk.classList.remove('on')});
+  var at=document.getElementById('htt'+t);if(at)at.classList.add('on');
+  var pct=TPCTS[t]||10;
+  var fill=document.getElementById('htFill');
+  fill.style.height=pct+'%';
+  fill.style.background=getLiquid(t);
+  var bulb=document.getElementById('htBulb');
+  bulb.style.background=getLiquid(t);
+  var nd=document.getElementById('htTempNum');
+  animNum(nd,parseInt(nd.textContent)||600,t,900);
+  if(p){
+    document.getElementById('htCode').textContent=p.code;
+    document.getElementById('htName').textContent=p.name;
+    document.getElementById('htDesc').textContent=p.desc;
+    var iw=document.getElementById('htImgWrap');
+    iw.outerHTML='<img class="ht-prodimg" id="htImgWrap" src="'+p.img+'" alt="'+p.name+'" onerror="this.outerHTML=\'<div class=\\\'ht-prodimg-ph\\\' id=\\\'htImgWrap\\\'>'+p.code+'</div>\'">';
+    document.getElementById('htViewBtn').onclick=function(){
+      var el=document.getElementById('pc-'+p.id);
+      if(el)el.scrollIntoView({behavior:'smooth',block:'center'});
+    };
+  }
+}
+
+buildScale();buildBtns();selectTemp(600);
+})();
+</script>
+</section>
+  <!-- <div class="heat-test-inner">
     <div class="heat-left rl">
       <div class="ey">Interactive Demo</div>
       <h2 class="st">CAN IT HANDLE<br>YOUR HEAT?</h2>
@@ -755,119 +936,223 @@ footer {
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- ═══ PRODUCTS ═══ -->
-<section class="prod-sec" id="products">
-  <div class="con">
-    <div class="sh c rv">
-      <div class="ey">Our Range</div>
-      <h2 class="st">TWO SHIELDS.<br>ONE STANDARD.</h2>
-      <p class="sd">Precision-engineered vermiculite-coated blankets. Choose your shield.</p>
+<section id="products" style="background:#F6F4F1;padding:100px 0 0">
+<style>
+.pv2-header{text-align:center;padding:0 60px 64px}
+.pv2-header .ey{justify-content:center}.pv2-header .ey::before{display:none}
+.pv2-header .sd{margin:0 auto}
+.pv2-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.pv2-card{position:relative;overflow:hidden;cursor:pointer;background:#1a1a1a;aspect-ratio:3/4}
+.pv2-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.25,.46,.45,.94),filter .7s ease;filter:brightness(.55) saturate(.8)}
+.pv2-img-ph{position:absolute;inset:0;background:linear-gradient(135deg,#2a1f14,#1a1208);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px}
+.pv2-img-ph-txt{font-family:'Black Ops One',sans-serif;font-size:42px;color:rgba(200,145,79,.25);letter-spacing:2px}
+.pv2-card:hover .pv2-img{transform:scale(1.1);filter:brightness(.35) saturate(.6)}
+.pv2-base-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,6,2,.97) 0%,rgba(10,6,2,.5) 40%,rgba(10,6,2,.05) 100%);transition:opacity .5s}
+.pv2-temp-badge{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.92);border:1px solid rgba(139,94,60,.4);padding:5px 12px;border-radius:1px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:#8B5E3C;letter-spacing:1px;z-index:2;transition:all .4s}
+.pv2-card:hover .pv2-temp-badge{background:#8B5E3C;color:#fff;border-color:#8B5E3C}
+.pv2-bottom{position:absolute;bottom:0;left:0;right:0;padding:22px 22px 24px;z-index:2;transition:all .5s cubic-bezier(.25,.46,.45,.94)}
+.pv2-code{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(200,145,79,.8);font-weight:700;margin-bottom:4px;transition:color .3s}
+.pv2-name{font-family:'Black Ops One',sans-serif;font-size:20px;color:#fff;letter-spacing:.5px;line-height:1.15;margin-bottom:0;transition:margin .4s}
+.pv2-card:hover .pv2-name{margin-bottom:12px}
+
+/* Hover reveal panel */
+.pv2-reveal{position:absolute;bottom:0;left:0;right:0;padding:0 22px 22px;z-index:3;opacity:0;transform:translateY(16px);transition:all .45s cubic-bezier(.25,.46,.45,.94);pointer-events:none}
+.pv2-card:hover .pv2-reveal{opacity:1;transform:translateY(0);pointer-events:auto}
+.pv2-specs-mini{list-style:none;margin-bottom:14px;display:flex;flex-direction:column;gap:5px}
+.pv2-specs-mini li{font-size:12px;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:7px;line-height:1.4}
+.pv2-specs-mini li::before{content:'';width:4px;height:4px;border-radius:50%;background:#C8914F;flex-shrink:0}
+.pv2-cta-row{display:flex;gap:7px}
+.pv2-btn-wa{flex:1;background:#8B5E3C;color:#fff;padding:11px 10px;border:none;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:5px}
+.pv2-btn-wa:hover{background:#E8620A}
+.pv2-btn-zoom{padding:11px 13px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:5px;white-space:nowrap}
+.pv2-btn-zoom:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.6)}
+
+/* 7th card full-width */
+.pv2-card-full{grid-column:1/-1;aspect-ratio:unset;height:360px}
+.pv2-card-full .pv2-img{filter:brightness(.45) saturate(.8)}
+.pv2-card-full:hover .pv2-img{transform:scale(1.06);filter:brightness(.28) saturate(.6)}
+.pv2-card-full .pv2-bottom{padding:28px 40px 32px}
+.pv2-card-full .pv2-name{font-size:32px}
+.pv2-card-full .pv2-reveal{padding:0 40px 28px}
+.pv2-card-full .pv2-specs-mini{flex-direction:row;flex-wrap:wrap;gap:8px 24px}
+.pv2-card-full .pv2-specs-mini li{flex:0 0 auto}
+
+/* ── LIGHTBOX ── */
+#pv2-lightbox{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);align-items:center;justify-content:center;flex-direction:column;gap:20px;padding:24px}
+#pv2-lightbox.open{display:flex}
+#pv2-lb-img{max-width:92vw;max-height:75vh;object-fit:contain;border-radius:3px;box-shadow:0 40px 100px rgba(0,0,0,.8);transition:opacity .3s}
+#pv2-lb-panel{background:rgba(20,12,6,.95);border:1px solid rgba(200,145,79,.3);border-radius:3px;padding:22px 28px;max-width:560px;width:100%;display:flex;gap:20px;align-items:flex-start}
+#pv2-lb-info{flex:1}
+#pv2-lb-code{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#C8914F;font-weight:700;margin-bottom:4px}
+#pv2-lb-name{font-family:'Black Ops One',sans-serif;font-size:22px;color:#fff;letter-spacing:.5px;margin-bottom:8px}
+#pv2-lb-temp{font-family:'Black Ops One',sans-serif;font-size:36px;color:#FFD700;letter-spacing:1px;margin-bottom:6px}
+#pv2-lb-desc{font-size:13px;color:rgba(255,255,255,.6);line-height:1.7}
+#pv2-lb-close{position:absolute;top:20px;right:24px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;width:38px;height:38px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;font-family:sans-serif}
+#pv2-lb-close:hover{background:rgba(232,98,10,.5);border-color:#E8620A}
+#pv2-lb-wa{background:#8B5E3C;color:#fff;padding:12px 22px;border:none;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:7px;white-space:nowrap;flex-shrink:0}
+#pv2-lb-wa:hover{background:#E8620A}
+
+/* 8th product hero */
+.pv2-hero-wrap{position:relative;overflow:hidden;height:500px;margin-top:3px}
+.pv2-hero-img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.5)}
+.pv2-hero-img-ph{width:100%;height:100%;background:linear-gradient(135deg,#1a0c05,#0d0a05);display:flex;align-items:center;justify-content:center}
+.pv2-hero-ov{position:absolute;inset:0;background:linear-gradient(100deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,.6) 45%,rgba(0,0,0,.1) 100%)}
+.pv2-hero-badge{position:absolute;top:28px;left:28px;background:#E8620A;color:#fff;padding:6px 18px;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:700;z-index:2}
+.pv2-hero-content{position:absolute;top:0;left:0;bottom:0;width:55%;padding:48px 56px;display:flex;flex-direction:column;justify-content:center;gap:12px;z-index:2}
+.pv2-hero-ey{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#C8914F;font-weight:700}
+.pv2-hero-model{font-family:'Black Ops One',sans-serif;font-size:58px;letter-spacing:2px;color:#C8914F;line-height:1}
+.pv2-hero-name{font-family:'Black Ops One',sans-serif;font-size:24px;color:#fff;letter-spacing:.5px;margin-bottom:2px}
+.pv2-hero-desc{font-size:13.5px;color:rgba(255,255,255,.7);line-height:1.8;max-width:420px}
+.pv2-hero-specgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+.pv2-hero-spec{padding:11px 12px;background:rgba(255,255,255,.07);border:1px solid rgba(200,145,79,.22);border-radius:2px}
+.pv2-hero-spec-l{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:700;margin-bottom:3px}
+.pv2-hero-spec-v{font-family:'Black Ops One',sans-serif;font-size:16px;color:#FFD700;letter-spacing:.5px}
+.pv2-hero-btns{display:flex;gap:10px;margin-top:6px;flex-wrap:wrap}
+.pv2-hero-btn-p{background:#8B5E3C;color:#fff;padding:14px 26px;border:none;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:7px}
+.pv2-hero-btn-p:hover{background:#E8620A;transform:translateY(-2px);box-shadow:0 10px 30px rgba(232,98,10,.4)}
+.pv2-hero-btn-g{padding:14px 26px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s}
+.pv2-hero-btn-g:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.pv2-hero-zoom-btn{position:absolute;bottom:28px;right:28px;z-index:3;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;padding:10px 18px;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:6px}
+.pv2-hero-zoom-btn:hover{background:rgba(255,255,255,.2)}
+@media(max-width:900px){.pv2-grid{grid-template-columns:1fr 1fr}.pv2-card-full{height:280px}.pv2-hero-content{width:100%;padding:28px 24px}.pv2-hero-wrap{height:auto;min-height:420px}.pv2-hero-specgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.pv2-grid{grid-template-columns:1fr}.pv2-card{aspect-ratio:4/5}.pv2-card-full{height:auto;aspect-ratio:4/5}}
+</style>
+
+<!-- LIGHTBOX -->
+<div id="pv2-lightbox" onclick="if(event.target===this)closeLB()">
+  <button id="pv2-lb-close" onclick="closeLB()">✕</button>
+  <img id="pv2-lb-img" src="" alt="">
+  <div id="pv2-lb-panel">
+    <div id="pv2-lb-info">
+      <div id="pv2-lb-code"></div>
+      <div id="pv2-lb-name"></div>
+      <div id="pv2-lb-temp"></div>
+      <div id="pv2-lb-desc"></div>
     </div>
-    <div class="prod-showcase rv">
-      <!-- SSB24 -->
-      <div class="pc-card">
-        <div class="pc-img-wrap">
-          <img src="SSB24.jpg" alt="SSB24 Standard" loading="lazy">
-          <div class="pc-img-overlay"></div>
-          <div class="pc-img-model">SSB24</div>
-        </div>
-        <div class="pc-name">Standard Series</div>
-        <div class="pc-sub">Entry Grade · Professional Use</div>
-        <ul class="pc-specs">
-          <li><span class="chk"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 8,2"/></svg></span>600°C continuous heat resistance</li>
-          <li><span class="chk"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 8,2"/></svg></span>Woven fibreglass base substrate</li>
-          <li><span class="chk"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 8,2"/></svg></span>24" × 24" standard coverage area</li>
-          <li><span class="chk"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 8,2"/></svg></span>Single vermiculite-coated surface</li>
-          <li><span class="chk"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 8,2"/></svg></span>Lightweight &amp; flexible design</li>
-          <li><span class="chk"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 8,2"/></svg></span>Ideal for workshops &amp; repairs</li>
-        </ul>
-        <div class="pc-price">Starting from <strong>₹ On Request</strong> &nbsp;·&nbsp; Bulk discounts available</div>
-        <button class="btn-o" style="width:100%;justify-content:center" onclick="waMsg('SSB24 Standard')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Enquire on WhatsApp
-        </button>
-      </div>
-      <!-- SSB30 -->
-      <div class="pc-card featured">
-        <div class="pc-badge">⭐ PREMIUM</div>
-        <div class="pc-img-wrap">
-          <img src="SSB30.jpg" alt="SSB30 Premium" loading="lazy" onerror="this.src='https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=800'">
-          <div class="pc-img-overlay"></div>
-          <div class="pc-img-model">SSB30</div>
-        </div>
-        <div class="pc-name">Premium Series</div>
-        <div class="pc-sub">Industrial Grade · Shipyard Approved</div>
-        <ul class="pc-specs">
-          <li><span class="chk"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 8,2"/></svg></span>1260°C peak heat resistance</li>
-          <li><span class="chk"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 8,2"/></svg></span>Double-coated vermiculite layer</li>
-          <li><span class="chk"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 8,2"/></svg></span>30" × 30" extended coverage area</li>
-          <li><span class="chk"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 8,2"/></svg></span>Reinforced stitched heavy-duty edges</li>
-          <li><span class="chk"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 8,2"/></svg></span>Spark &amp; spatter repellent finish</li>
-          <li><span class="chk"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 8,2"/></svg></span>Reusable — years of industrial use</li>
-        </ul>
-        <div class="pc-price">Starting from <strong>₹ On Request</strong> &nbsp;·&nbsp; Bulk discounts available</div>
-        <button class="btn-o" style="width:100%;justify-content:center" onclick="waMsg('SSB30 Premium')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Enquire on WhatsApp
-        </button>
-      </div>
-    </div>
-    <!-- Compare Table -->
-    <div class="compare-visual rv" id="compare">
-      <div class="cv-col">
-        <h3>SSB24</h3><h4>Standard Series</h4>
-        <div class="cv-row"><span class="cv-label">Heat Rating</span><span class="cv-val hl">600°C</span></div>
-        <div class="cv-row"><span class="cv-label">Size</span><span class="cv-val">24" × 24"</span></div>
-        <div class="cv-row"><span class="cv-label">Coating</span><span class="cv-val">Single Layer</span></div>
-        <div class="cv-row"><span class="cv-label">Base</span><span class="cv-val">Woven Fibreglass</span></div>
-        <div class="cv-row"><span class="cv-label">Edge</span><span class="cv-val">Standard Hem</span></div>
-        <div class="cv-row"><span class="cv-label">Best For</span><span class="cv-val">Workshops, Small Repairs</span></div>
-        <div style="margin-top:22px"><button class="btn-g" onclick="waMsg('SSB24 Standard')">Enquire SSB24</button></div>
-      </div>
-      <div class="cv-divider"></div>
-      <div class="cv-col premium">
-        <h3>SSB30</h3><h4>Premium Series</h4>
-        <div class="cv-row"><span class="cv-label">Heat Rating</span><span class="cv-val hl">1260°C</span></div>
-        <div class="cv-row"><span class="cv-label">Size</span><span class="cv-val">30" × 30"</span></div>
-        <div class="cv-row"><span class="cv-label">Coating</span><span class="cv-val">Double Layer</span></div>
-        <div class="cv-row"><span class="cv-label">Base</span><span class="cv-val">Reinforced Fibreglass</span></div>
-        <div class="cv-row"><span class="cv-label">Edge</span><span class="cv-val">Reinforced Stitch</span></div>
-        <div class="cv-row"><span class="cv-label">Best For</span><span class="cv-val">Shipyards, Heavy Industry</span></div>
-        <div style="margin-top:22px"><button class="btn-o" onclick="waMsg('SSB30 Premium')">Enquire SSB30</button></div>
-      </div>
-   </div>
-    <!-- Authorized Dealer CTA
-     <div class="rv" style="margin-top:40px;background:linear-gradient(135deg,rgba(139,94,60,.07) 0%,rgba(232,98,10,.05) 100%);border:1px solid rgba(139,94,60,.22);border-radius:4px;padding:36px 44px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px">
-      <div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap"> -->
-        <!-- Dealer Logo
-        <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:8px">
-          <img src="SIGNATURE LOGO PNG.png" alt="Signature – A Darshan Safety Product"
-  style="height:80px;width:auto;object-fit:contain;mix-blend-mode:multiply;filter:brightness(1.1)"
-  onerror="this.style.display='none';document.getElementById('dealer-badge-fallback').style.display='flex'"> -->
-          <!-- Fallback badge if image missing
-          <div id="dealer-badge-fallback" style="display:none;width:80px;height:80px;border-radius:50%;background:rgba(139,94,60,.1);border:2px solid rgba(139,94,60,.3);align-items:center;justify-content:center;flex-direction:column;gap:2px">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8B5E3C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-            <span style="font-family:'Barlow Condensed',sans-serif;font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:#8B5E3C;font-weight:700;text-align:center;line-height:1.2">Authorized<br>Dealer</span>
-          </div>
-          <span style="font-family:'Barlow Condensed',sans-serif;font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);font-weight:700;opacity:.7">Official Partner</span>
-        </div> -->
-        <!-- Divider
-        <div style="width:1px;height:80px;background:rgba(139,94,60,.2);flex-shrink:0"></div> -->
-        <!-- Text Content -->
-        <!-- <div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:10px"><span style="display:inline-block;width:28px;height:1px;background:var(--accent)"></span>Premium Access</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;color:var(--text);line-height:1;margin-bottom:8px">LOOKING FOR MORE PREMIUM OPTIONS?</div>
-          <p style="font-size:13.5px;color:var(--muted);max-width:480px;line-height:1.75;margin:0">For bulk orders, custom configurations, and exclusive pricing — connect directly with our authorized dealer network across India.</p>
-        </div>
-      </div>
-      <button onclick="window.open('https://wa.me/919712579456?text='+encodeURIComponent('Hello! I am interested in becoming or contacting an Authorized Dealer for Spark Shield welding blankets.'),'_blank')" style="background:var(--accent);color:#fff;padding:16px 34px;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;border:none;display:inline-flex;align-items:center;gap:10px;transition:all .35s;flex-shrink:0;cursor:pointer" onmouseover="this.style.background='#E8620A';this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 36px rgba(232,98,10,.45)'" onmouseout="this.style.background='#8B5E3C';this.style.transform='';this.style.boxShadow=''">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Contact Authorized Dealer
-      </button>
-    </div> -->
+    <button id="pv2-lb-wa" onclick="waMsg(currentLBProduct)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Enquire
+    </button>
   </div>
+</div>
+
+<div class="con">
+  <div class="pv2-header rv">
+    <div class="ey">Our Range</div>
+    <h2 class="st">EIGHT SHIELDS.<br>ONE STANDARD.</h2>
+    <p class="sd">Precision-engineered blankets for every temperature demand. Choose your protection.</p>
+  </div>
+</div>
+
+<div class="pv2-grid rv" id="pv2Grid"></div>
+
+<!-- 8th PRODUCT: CAR FIRE BLANKET — FULL WIDTH HERO -->
+<div style="margin-top:3px" class="rv">
+  <div style="padding:32px 60px 16px;background:#F6F4F1">
+    <div class="ey">Specialty Product</div>
+  </div>
+  <div class="pv2-hero-wrap" id="pc-carfire">
+    <img src="DSZCFB0.6.jpg" class="pv2-hero-img" alt="Car Fire Blanket" onerror="this.style.display='none';document.getElementById('pv2-hero-ph').style.display='flex'">
+    <div id="pv2-hero-ph" class="pv2-hero-img-ph" style="position:absolute;inset:0;display:none"></div>
+    <div class="pv2-hero-ov"></div>
+    <div class="pv2-hero-badge">★ Specialty Product</div>
+    <div class="pv2-hero-content">
+      <div class="pv2-hero-ey">Model DSZCFB0.6</div>
+      <div class="pv2-hero-model">DSZCFB</div>
+      <div class="pv2-hero-name">Car Fire Blanket</div>
+      <div class="pv2-hero-desc">Rapid-deploy fire containment for automotive workshops, EV charging stations &amp; emergency responders. Smothers vehicle fires without water — protecting interiors, adjacent property, and personnel from total loss.</div>
+      <div class="pv2-hero-specgrid">
+        <div class="pv2-hero-spec"><div class="pv2-hero-spec-l">Heat Rating</div><div class="pv2-hero-spec-v">900°C</div></div>
+        <div class="pv2-hero-spec"><div class="pv2-hero-spec-l">Model</div><div class="pv2-hero-spec-v">DSZCFB0.6</div></div>
+        <div class="pv2-hero-spec"><div class="pv2-hero-spec-l">Coverage</div><div class="pv2-hero-spec-v">Full Car</div></div>
+        <div class="pv2-hero-spec"><div class="pv2-hero-spec-l">Use Case</div><div class="pv2-hero-spec-v">EV / Auto</div></div>
+      </div>
+      <div class="pv2-hero-btns">
+        <button class="pv2-hero-btn-p" onclick="waMsg('Car Fire Blanket DSZCFB0.6')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enquire on WhatsApp
+        </button>
+        <button class="pv2-hero-btn-g" onclick="s2('contact')">Request Quote</button>
+      </div>
+    </div>
+    <button class="pv2-hero-zoom-btn" onclick="openLB({name:'Car Fire Blanket',code:'DSZCFB0.6',temp:'900°C',img:'DSZCFB0.6.jpg',desc:'Rapid-deploy fire containment for automotive workshops and EV stations. Full vehicle coverage.'})">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+      View Full Image
+    </button>
+  </div>
+</div>
+
+<script>
+var currentLBProduct='';
+var PRODS2=[
+  {id:'grinding',name:'Grinding Blanket',code:'DSZFG2.0',temp:'600°C',img:'DSZFG2.0.jpg',desc:'For grinding & cutting ops — resists abrasion and fine metal sparks at 600°C continuous. Lightweight and flexible for workshop use.',specs:['600°C continuous rating','Abrasion-resistant surface','Fibreglass base','Lightweight & flexible']},
+  {id:'nonitchy',name:'Non-Itchy Welding Blanket',code:'DSZSFG1.0',temp:'800°C',img:'DSZSFG1.0.jpg',desc:'Skin-friendly silica-free formulation. Zero irritation for bare-handed operators. Full 800°C protection without compromise.',specs:['800°C heat resistance','Non-irritant to skin','Silica-free construction','Operator certified']},
+  {id:'black',name:'Black Welding Blanket',code:'DSZGFG2.0',temp:'900°C',img:'DSZGFG2.0.jpg',desc:'Carbon-infused black surface absorbs radiant heat and repels spatter. Heavy steel fabrication environments.',specs:['900°C peak resistance','Carbon-coated surface','Anti-spatter finish','Steel plant approved']},
+  {id:'brown',name:'Brown Welding Blanket',code:'DSZMDWB2.5',temp:'1000°C',img:'DSZMDWB2.5.jpg',desc:'Industry workhorse. Handles 1000°C sustained heat across shipyards, pipeline work, and structural fabrication.',specs:['1000°C heat resistance','Double vermiculite coat','Reinforced hem stitching','Pan-India bestseller']},
+  {id:'white',name:'White Welding Blanket',code:'DSZCF3.0',temp:'1100°C',img:'DSZCF3.0.jpg',desc:'High-purity ceramic-fibre composite for clean environments — pharmaceutical, food-grade, and precision manufacturing.',specs:['1100°C peak rating','Ceramic fibre composite','Clean white surface','Pharma & food grade']},
+  {id:'brownprem',name:'Brown Premium Welding Blanket',code:'DSZVCF3.0',temp:'1200°C',img:'DSZVCF3.0.jpg',desc:'Premium double-coated vermiculite with reinforced fibreglass mesh. Trusted by defence contractors and heavy-duty shipyards.',specs:['1200°C extreme rating','Triple-layer construction','Reinforced mesh core','Defence & marine grade']},
+  {id:'nonasb',name:'Non-Asbestos Welding Blanket',code:'DSZ96HS1.4',temp:'1400°C',img:'DSZ96HS1.4.jpg',desc:'1400°C — the highest rating. 100% asbestos-free. Replaces legacy asbestos blankets in foundries, smelters and aerospace.',specs:['1400°C — highest rating','100% asbestos-free','Foundry & smelter approved','Full regulatory compliance']}
+];
+
+function openLB(p){
+  currentLBProduct=p.name+' '+p.code;
+  var lb=document.getElementById('pv2-lightbox');
+  var img=document.getElementById('pv2-lb-img');
+  img.src=p.img;
+  img.alt=p.name;
+  img.onerror=function(){this.style.display='none'};
+  img.style.display='block';
+  document.getElementById('pv2-lb-code').textContent=p.code;
+  document.getElementById('pv2-lb-name').textContent=p.name;
+  document.getElementById('pv2-lb-temp').textContent=p.temp;
+  document.getElementById('pv2-lb-desc').textContent=p.desc;
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLB(){
+  document.getElementById('pv2-lightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB()});
+
+(function buildGrid(){
+  var grid=document.getElementById('pv2Grid');
+  grid.innerHTML='';
+  PRODS2.forEach(function(p,i){
+    var isFull=i===6;
+    var card=document.createElement('div');
+    card.className='pv2-card'+(isFull?' pv2-card-full':'');
+    card.id='pc-'+p.id;
+    var shortCode=p.code.replace('DSZ','').replace(/[0-9.]/g,'').toUpperCase();
+    card.innerHTML=
+      '<img class="pv2-img" src="'+p.img+'" alt="'+p.name+'" loading="lazy" onerror="this.style.display=\'none\'">'+
+      '<div class="pv2-img-ph"><div class="pv2-img-ph-txt">'+shortCode+'</div></div>'+
+      '<div class="pv2-base-ov"></div>'+
+      '<div class="pv2-temp-badge">'+p.temp+'</div>'+
+      '<div class="pv2-bottom">'+
+        '<div class="pv2-code">'+p.code+'</div>'+
+        '<div class="pv2-name">'+p.name+'</div>'+
+      '</div>'+
+      '<div class="pv2-reveal">'+
+        '<ul class="pv2-specs-mini">'+p.specs.map(function(s){return'<li>'+s+'</li>'}).join('')+'</ul>'+
+        '<div class="pv2-cta-row">'+
+          '<button class="pv2-btn-wa" onclick="waMsg(\''+p.name+'\')">'+
+            '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>'+
+            'Enquire'+
+          '</button>'+
+          '<button class="pv2-btn-zoom" onclick="openLB({name:\''+p.name+'\',code:\''+p.code+'\',temp:\''+p.temp+'\',img:\''+p.img+'\',desc:\''+p.desc.replace(/'/g,"\\'")+'\'})">'+
+            '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>'+
+            'View Image'+
+          '</button>'+
+        '</div>'+
+      '</div>';
+    grid.appendChild(card);
+  });
+})();
+</script>
 </section>
 
 <!-- ═══ USAGE / APPLICATIONS ═══ -->
@@ -1002,7 +1287,7 @@ footer {
     </div>
     <div class="bl-grid rv" id="ss-blog-grid"></div>
     <div style="text-align:center;margin-top:40px">
-      <a href="blog.html" class="btn-g" style="display:inline-flex">GO FOR LATEST FORGE UPDATE -></a>
+      <a href="/blog" class="btn-g" style="display:inline-flex">GO FOR LATEST FORGE UPDATE -></a>
     </div>
   </div>
 </section>
@@ -1072,7 +1357,7 @@ footer {
   <div class="con">
     <div class="ft-grid2">
       <div>
-        <img src="spark-shiled.png" class="ft-logo-img" alt="SparkShield Logo">
+        <img src="spark-shiled.png" class="ft-logo-img" alt="SparkShield Logo"><br><br>
         <div class="ft-about">India's trusted manufacturer of vermiculite-coated welding blankets for industrial, marine, and construction applications. Quality that stands the heat.</div>
         <button class="ft-wa" onclick="waMsg('general')">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -1093,7 +1378,7 @@ footer {
         <ul class="ft-links">
           <li><a href="#knowledge">About Vermiculite</a></li>
           <li><a href="#features">Why Spark Shield</a></li>
-          <li><a href="#blog">Blog</a></li>
+          <li><a href="/blog">Blog</a></li>
           <li><a href="#contact">Contact Us</a></li>
         </ul>
       </div>
