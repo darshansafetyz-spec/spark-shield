@@ -48,8 +48,8 @@ function buildBlogCard(blog, featured) {
         (excerpt ? '<div class="bl-ex">' + excerpt + '</div>' : '') +
 
         '<a href="blog-details.html?slug=' + encodeURIComponent(blog.slug) + '"' +
-           ' class="bl-lnk" aria-label="Read full article: ${b.title}" aria-label="Read full article: ' + blog.title + '">' +
-          'Read full article: ${b.title}' +
+           ' class="bl-lnk" aria-label="Read Article ?" aria-label="Read full article: ' + blog.title + '">' +
+          'Read Article ?' +
           '<svg width="12" height="12" viewBox="0 0 24 24"' +
               ' stroke="currentColor" fill="none"' +
               ' stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
