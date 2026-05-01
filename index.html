@@ -594,6 +594,13 @@ footer {
   footer{padding:64px 28px 30px}
   .trust-banner{padding:48px 28px}
   .gallery-sec{padding:80px 28px}
+  .pv2-grid{grid-template-columns:1fr 1fr}
+  .ht-wrap{grid-template-columns:1fr}
+  .ht-right{min-height:400px}
+  .pv2-hero-content{width:100%;padding:28px 24px}
+  .pv2-hero-wrap{height:auto;min-height:440px}
+  .pv2-hero-specgrid{grid-template-columns:1fr 1fr}
+  .pv2-header{padding:0 28px 48px}
 }
 @media(max-width:768px){
   .nl{display:none}.ham{display:flex}
@@ -605,10 +612,39 @@ footer {
   .gallery-item{flex:0 0 230px;height:270px}
   .gallery-item:hover{flex:0 0 310px}
   .testi-card{flex:0 0 280px}
+  .ht-wrap{grid-template-columns:1fr}
+  .ht-left{padding:40px 24px}
+  .ht-temp-disp{font-size:64px}
+  .ht-tube{width:56px;height:280px}
+  .ht-bulb{width:44px;height:44px}
+  .ht-scale{height:280px}
+  .ht-tick{height:calc(280px / 6)}
+  .pv2-grid{grid-template-columns:1fr}
+  .pv2-card{aspect-ratio:4/5}
+  .pv2-card-full{height:auto;aspect-ratio:4/5}
+  .ft-grid{grid-template-columns:1fr 1fr}
+  .bl-grid{grid-template-columns:1fr}
+  #pv2-lb-drawer{grid-template-columns:1fr}
+  #pv2-lb-img{min-height:220px;max-height:40vw}
+  .pv2-hero-content{padding:22px 20px}
+  .pv2-hero-model{font-size:40px}
+  .pv2-hero-name{font-size:18px}
 }
 @media(max-width:480px){
   .usage-grid{grid-template-columns:1fr}
   .hero-stats{grid-template-columns:1fr 1fr}
+  .ft-grid{grid-template-columns:1fr}
+  .hero-btns{flex-direction:column}
+  nav{height:70px;padding:0 16px}
+  .logo-wrap img{height:60px}
+  section{padding:60px 16px}
+  .pv2-header{padding:0 16px 40px}
+  .pv2-hero-content{padding:16px}
+  .pv2-hero-specgrid{grid-template-columns:1fr 1fr}
+  .pv2-hero-btns{flex-direction:column}
+  .ht-temp-disp{font-size:52px}
+  footer{padding:48px 16px 24px}
+  .trust-banner{padding:36px 16px}
 }
 #wc-wrap { background: #0a0a0a; border-radius: 8px; overflow: hidden; font-family: sans-serif; }
   #weld-canvas { display: block; width: 100%; height: 420px; touch-action: none; }
@@ -794,7 +830,7 @@ footer {
 <!-- ═══ INTERACTIVE HEAT TEST ═══ -->
 <section id="heattest" style="padding:0;background:var(--bg)">
 <style>
-.ht-wrap{display:grid;grid-template-columns:1fr 400px;min-height:680px}
+.ht-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:680px}
 .ht-left{padding:72px 56px;background:var(--text);display:flex;flex-direction:column;gap:0}
 .ht-left .ey{color:var(--gold)}.ht-left .ey::before{background:var(--gold)}
 .ht-left .st{color:var(--bg);font-size:clamp(28px,3.5vw,52px)}
@@ -821,14 +857,14 @@ footer {
 .ht-right::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 90%,rgba(232,98,10,.15) 0%,transparent 65%);animation:htPulse 3s ease-in-out infinite alternate;pointer-events:none}
 @keyframes htPulse{0%{opacity:.4}100%{opacity:1}}
 .ht-thermo-wrap{display:flex;flex-direction:column;align-items:center;gap:18px;position:relative;z-index:2}
-.ht-temp-disp{font-family:'Black Ops One',sans-serif;font-size:68px;color:#fff;letter-spacing:2px;line-height:1;text-align:center}
+.ht-temp-disp{font-family:'Black Ops One',sans-serif;font-size:90px;color:#fff;letter-spacing:2px;line-height:1;text-align:center}
 .ht-temp-disp span{font-size:28px;color:var(--gold)}
 .ht-tube-row{display:flex;gap:28px;align-items:flex-end}
-.ht-tube{position:relative;width:54px;height:300px;background:rgba(255,255,255,.05);border-radius:27px 27px 0 0;border:2px solid rgba(255,255,255,.12);overflow:hidden;margin-bottom:0}
+.ht-tube{position:relative;width:80px;height:400px;background:rgba(255,255,255,.05);border-radius:40px 40px 0 0;border:2px solid rgba(255,255,255,.12);overflow:hidden;margin-bottom:0}
 .ht-fill{position:absolute;bottom:0;left:0;right:0;transition:height 1.4s cubic-bezier(.25,.46,.45,.94);border-radius:0}
-.ht-bulb{width:42px;height:42px;border-radius:50%;margin-top:-2px;box-shadow:0 0 18px rgba(255,100,0,.6);transition:background 1.4s}
-.ht-scale{display:flex;flex-direction:column;justify-content:space-between;height:300px;padding:0}
-.ht-tick{display:flex;align-items:center;gap:6px;cursor:pointer;padding:0 4px;border-radius:2px;transition:background .2s;height:calc(300px / 6)}
+.ht-bulb{width:60px;height:60px;border-radius:50%;margin-top:-2px;box-shadow:0 0 24px rgba(255,100,0,.7);transition:background 1.4s}
+.ht-scale{display:flex;flex-direction:column;justify-content:space-between;height:400px;padding:0}
+.ht-tick{display:flex;align-items:center;gap:6px;cursor:pointer;padding:0 4px;border-radius:2px;transition:background .2s;height:calc(400px / 6)}
 .ht-tick:hover{background:rgba(200,145,79,.1)}
 .ht-tickline{width:10px;height:1px;background:rgba(255,255,255,.2);transition:background .3s}
 .ht-ticklbl{font-family:'Barlow Condensed',sans-serif;font-size:11px;color:rgba(255,255,255,.35);letter-spacing:1px;font-weight:600;transition:color .3s;white-space:nowrap}
@@ -861,11 +897,11 @@ footer {
     <div class="ht-thermo-wrap">
       <div class="ht-temp-disp"><span id="htTempNum">600</span><span>°C</span></div>
       <div class="ht-tube-row" style="display:flex;gap:0;align-items:stretch">
-        <div style="display:flex;flex-direction:column;align-items:center;margin-right:16px">
+        <div style="display:flex;flex-direction:column;align-items:center;margin-right:22px">
           <div class="ht-tube"><div class="ht-fill" id="htFill" style="height:4%"></div></div>
-          <div class="ht-bulb" id="htBulb" style="margin-top:6px"></div>
+          <div class="ht-bulb" id="htBulb" style="margin-top:8px"></div>
         </div>
-        <div class="ht-scale" id="htScale" style="display:flex;flex-direction:column;justify-content:space-between;height:300px;padding:0;margin-bottom:42px"></div>
+        <div class="ht-scale" id="htScale" style="display:flex;flex-direction:column;justify-content:space-between;height:400px;padding:0;margin-bottom:60px"></div>
       </div>
       <div class="ht-sublabel">Peak heat resistance</div>
     </div>
@@ -879,7 +915,7 @@ var PRODS=[
   {id:'black',name:'Black Welding Blanket',code:'SSGFG2.0',temp:900,desc:'Carbon-infused black surface absorbs radiant heat and blocks spatter. Heavy steel fabrication and high-visibility environments.',img:'SSGFG.jpeg'},
   {id:'brown',name:'Brown Welding Blanket',code:'SSMDWB2.5',temp:1000,desc:'Industry workhorse. Handles 1000°C sustained heat across shipyards, pipeline work, and structural fabrication.',img:'SSB24.jpg'},
   {id:'white',name:'White Welding Blanket',code:'SSCF3.0',temp:1100,desc:'High-purity ceramic-fibre composite for clean environments — pharmaceutical, food-grade, and precision manufacturing.',img:'SSCF.jpeg'},
-  {id:'brownprem',name:'Brown Premium Welding Blanket',code:'SSVCF3.0',temp:1200,desc:'Premium double-coated vermiculite with reinforced fibreglass mesh. Trusted by defence & heavy-duty shipyards.',img:'SSB30.jpg'},
+  {id:'brownprem',name:'Brown Premium Welding Blanket',code:'SSVCF3.0',temp:1200,desc:'Premium double-coated vermiculite with reinforced fibreglass mesh. Trusted by defence & heavy-duty shipyards.',img:'SSB30.jpeg'},
   {id:'nonasb',name:'Non-Asbestos Welding Blanket',code:'SS96HS1.4',temp:1400,desc:'1400°C — the highest rating. 100% asbestos-free. Replaces legacy asbestos blankets in foundries, smelters and aerospace.',img:'SSHSF.jpeg'}
 ];
 var TPCTS={600:6.7,800:22,900:37,1000:51.5,1100:66,1200:80,1400:100};
@@ -1058,54 +1094,76 @@ buildScale();buildBtns();selectTemp(600);
 #pv2-lb-drawer{background:#fff;border-radius:12px;width:100%;max-width:860px;max-height:90vh;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;transform:scale(.92) translateY(20px);opacity:0;transition:all .35s cubic-bezier(.25,.46,.45,.94);box-shadow:0 40px 80px rgba(0,0,0,.3);position:relative}
 #pv2-lightbox.open #pv2-lb-drawer{transform:scale(1) translateY(0);opacity:1}
 #pv2-lb-handle{display:none}
-#pv2-lb-img{width:100%;height:100%;object-fit:cover;display:block;min-height:380px;background:#f2ede8}
-#pv2-lb-panel{padding:36px 32px;display:flex;flex-direction:column;gap:10px;background:#fff;overflow-y:auto}
-#pv2-lb-info{display:flex;flex-direction:column;gap:8px}
-#pv2-lb-code{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#8B5E3C;font-weight:700}
-#pv2-lb-name{font-family:'Black Ops One',sans-serif;font-size:26px;color:#1A1A1A;letter-spacing:.5px;line-height:1.1}
-#pv2-lb-temp{font-family:'Black Ops One',sans-serif;font-size:42px;color:#E8620A;letter-spacing:1px;line-height:1;border-bottom:2px solid #f0ebe5;padding-bottom:14px;margin-bottom:4px}
-#pv2-lb-desc{font-size:13.5px;color:#6F6B66;line-height:1.8;flex:1}
-#pv2-lb-close{position:absolute;top:14px;right:14px;background:rgba(0,0,0,.08);border:none;color:#555;width:36px;height:36px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:sans-serif;z-index:2}
-#pv2-lb-close:hover{background:#E8620A;color:#fff}
-#pv2-lb-wa{background:#8B5E3C;color:#fff;padding:14px 24px;border:none;border-radius:6px;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:auto}
-#pv2-lb-wa:hover{background:#E8620A;transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,98,10,.4)}
-@media(max-width:640px){#pv2-lb-drawer{grid-template-columns:1fr;max-height:95vh}#pv2-lb-img{min-height:240px;max-height:45vw}#pv2-lb-panel{padding:22px 20px}}
-#pv2-lb-img{max-width:92vw;max-height:75vh;object-fit:contain;border-radius:3px;box-shadow:0 40px 100px rgba(0,0,0,.8);transition:opacity .3s}
-#pv2-lb-panel{background:rgba(20,12,6,.95);border:1px solid rgba(200,145,79,.3);border-radius:3px;padding:22px 28px;max-width:560px;width:100%;display:flex;gap:20px;align-items:flex-start}
-#pv2-lb-info{flex:1}
-#pv2-lb-code{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#C8914F;font-weight:700;margin-bottom:4px}
-#pv2-lb-name{font-family:'Black Ops One',sans-serif;font-size:22px;color:#fff;letter-spacing:.5px;margin-bottom:8px}
-#pv2-lb-temp{font-family:'Black Ops One',sans-serif;font-size:36px;color:#FFD700;letter-spacing:1px;margin-bottom:6px}
-#pv2-lb-desc{font-size:13px;color:rgba(255,255,255,.6);line-height:1.7}
-#pv2-lb-close{position:absolute;top:20px;right:24px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;width:38px;height:38px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;font-family:sans-serif}
-#pv2-lb-close:hover{background:rgba(232,98,10,.5);border-color:#E8620A}
-#pv2-lb-wa{background:#8B5E3C;color:#fff;padding:12px 22px;border:none;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:7px;white-space:nowrap;flex-shrink:0}
-#pv2-lb-wa:hover{background:#E8620A}
+#pv2-lb-drawer{background:#111 !important;}
+#pv2-lb-img{width:100%;height:100%;object-fit:cover;display:block;min-height:380px;background:#1a1208;}
+#pv2-lb-panel{padding:36px 32px;display:flex;flex-direction:column;gap:12px;background:#111;overflow-y:auto;}
+#pv2-lb-info{display:flex;flex-direction:column;gap:8px;}
+#pv2-lb-code{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#C8914F;font-weight:700;}
+#pv2-lb-name{font-family:'Black Ops One',sans-serif;font-size:26px;color:#fff;letter-spacing:.5px;line-height:1.1;}
+#pv2-lb-temp{font-family:'Black Ops One',sans-serif;font-size:42px;color:#FF8C00;letter-spacing:1px;line-height:1;border-bottom:1px solid rgba(200,145,79,0.25);padding-bottom:14px;margin-bottom:4px;text-shadow:0 0 20px rgba(255,140,0,0.6);}
+#pv2-lb-desc{font-size:13.5px;color:rgba(255,255,255,0.65);line-height:1.85;flex:1;}
+#pv2-lb-specs{list-style:none;margin:10px 0 4px;display:flex;flex-direction:column;gap:8px;}
+#pv2-lb-specs li{font-size:13px;color:rgba(255,255,255,0.7);display:flex;align-items:flex-start;gap:9px;line-height:1.45;}
+#pv2-lb-specs li::before{content:'';width:6px;height:6px;border-radius:50%;background:#C8914F;flex-shrink:0;margin-top:5px;}
+#pv2-lb-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:#aaa;width:36px;height:36px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:sans-serif;z-index:2;}
+#pv2-lb-close:hover{background:#E8620A;color:#fff;border-color:#E8620A;}
+#pv2-lb-actions{display:flex;gap:10px;margin-top:auto;flex-wrap:wrap;}
+#pv2-lb-wa{flex:1;background:#8B5E3C;color:#fff;padding:14px 16px;border:none;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px;}
+#pv2-lb-wa:hover{background:#E8620A;transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,98,10,.4);}
+#pv2-lb-share{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;padding:14px 16px;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:7px;}
+#pv2-lb-share:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.5);}
+@media(max-width:640px){#pv2-lb-drawer{grid-template-columns:1fr;max-height:95vh;}#pv2-lb-img{min-height:220px;max-height:40vw;}#pv2-lb-panel{padding:22px 18px;}}
 
 /* 8th product hero */
-.pv2-hero-wrap{position:relative;overflow:hidden;height:500px;margin-top:3px}
-.pv2-hero-img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.5)}
-.pv2-hero-img-ph{width:100%;height:100%;background:linear-gradient(135deg,#1a0c05,#0d0a05);display:flex;align-items:center;justify-content:center}
-.pv2-hero-ov{position:absolute;inset:0;background:linear-gradient(100deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,.6) 45%,rgba(0,0,0,.1) 100%)}
-.pv2-hero-badge{position:absolute;top:28px;left:28px;background:#E8620A;color:#fff;padding:6px 18px;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:700;z-index:2}
-.pv2-hero-content{position:absolute;top:0;left:0;bottom:0;width:55%;padding:48px 56px;display:flex;flex-direction:column;justify-content:center;gap:12px;z-index:2}
+.pv2-hero-wrap{position:relative;overflow:hidden;margin-top:3px;min-height:560px;display:flex;flex-direction:column}
+.pv2-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:brightness(.45)}
+.pv2-hero-img-ph{position:absolute;inset:0;background:linear-gradient(135deg,#1a0c05,#0d0a05);display:flex;align-items:center;justify-content:center}
+.pv2-hero-ov{position:absolute;inset:0;background:linear-gradient(105deg,rgba(0,0,0,.96) 0%,rgba(0,0,0,.82) 38%,rgba(0,0,0,.45) 65%,rgba(0,0,0,.1) 100%)}
+.pv2-hero-badge{position:absolute;top:24px;left:24px;background:#E8620A;color:#fff;padding:6px 16px;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:700;z-index:3}
+.pv2-hero-content{position:relative;z-index:2;width:100%;max-width:620px;padding:80px 52px 52px;display:flex;flex-direction:column;justify-content:center;gap:10px;flex:1}
 .pv2-hero-ey{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#C8914F;font-weight:700}
-.pv2-hero-model{font-family:'Black Ops One',sans-serif;font-size:58px;letter-spacing:2px;color:#C8914F;line-height:1}
-.pv2-hero-name{font-family:'Black Ops One',sans-serif;font-size:24px;color:#fff;letter-spacing:.5px;margin-bottom:2px}
-.pv2-hero-desc{font-size:13.5px;color:rgba(255,255,255,.7);line-height:1.8;max-width:420px}
-.pv2-hero-specgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
-.pv2-hero-spec{padding:11px 12px;background:rgba(255,255,255,.07);border:1px solid rgba(200,145,79,.22);border-radius:2px}
+.pv2-hero-model{font-family:'Black Ops One',sans-serif;font-size:clamp(36px,5vw,58px);letter-spacing:2px;color:#C8914F;line-height:1}
+.pv2-hero-name{font-family:'Black Ops One',sans-serif;font-size:clamp(18px,2.5vw,24px);color:#fff;letter-spacing:.5px;margin-bottom:2px}
+.pv2-hero-desc{font-size:13.5px;color:rgba(255,255,255,.72);line-height:1.85;max-width:480px}
+.pv2-hero-specgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px;max-width:560px}
+.pv2-hero-spec{padding:10px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(200,145,79,.22);border-radius:2px;backdrop-filter:blur(4px)}
 .pv2-hero-spec-l{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:700;margin-bottom:3px}
-.pv2-hero-spec-v{font-family:'Black Ops One',sans-serif;font-size:16px;color:#FFD700;letter-spacing:.5px}
-.pv2-hero-btns{display:flex;gap:10px;margin-top:6px;flex-wrap:wrap}
-.pv2-hero-btn-p{background:#8B5E3C;color:#fff;padding:14px 26px;border:none;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:7px}
+.pv2-hero-spec-v{font-family:'Black Ops One',sans-serif;font-size:15px;color:#FFD700;letter-spacing:.5px}
+.pv2-hero-btns{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
+.pv2-hero-btn-p{background:#8B5E3C;color:#fff;padding:13px 24px;border:none;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:7px}
 .pv2-hero-btn-p:hover{background:#E8620A;transform:translateY(-2px);box-shadow:0 10px 30px rgba(232,98,10,.4)}
-.pv2-hero-btn-g{padding:14px 26px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s}
-.pv2-hero-btn-g:hover{border-color:#fff;background:rgba(255,255,255,.08)}
-.pv2-hero-zoom-btn{position:absolute;bottom:28px;right:28px;z-index:3;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;padding:10px 18px;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:6px}
-.pv2-hero-zoom-btn:hover{background:rgba(255,255,255,.2)}
-@media(max-width:900px){.pv2-grid{grid-template-columns:1fr 1fr}.pv2-card-full{height:280px}.pv2-hero-content{width:100%;padding:28px 24px}.pv2-hero-wrap{height:auto;min-height:420px}.pv2-hero-specgrid{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.pv2-grid{grid-template-columns:1fr}.pv2-card{aspect-ratio:4/5}.pv2-card-full{height:auto;aspect-ratio:4/5}}
+.pv2-hero-btn-g{padding:13px 24px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s}
+.pv2-hero-btn-g:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+.pv2-hero-zoom-btn{position:absolute;bottom:24px;right:24px;z-index:3;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.25);color:#fff;padding:10px 16px;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:6px;backdrop-filter:blur(8px)}
+.pv2-hero-zoom-btn:hover{background:rgba(139,94,60,.6);border-color:rgba(200,145,79,.6)}
+
+/* ── Responsive for specialty product ── */
+@media(max-width:900px){
+  .pv2-grid{grid-template-columns:1fr 1fr}
+  .pv2-card-full{height:280px}
+  .pv2-hero-wrap{min-height:auto}
+  .pv2-hero-content{padding:60px 32px 40px;max-width:100%}
+  .pv2-hero-specgrid{grid-template-columns:1fr 1fr;max-width:100%}
+  .pv2-hero-model{font-size:42px}
+}
+@media(max-width:600px){
+  .pv2-grid{grid-template-columns:1fr}
+  .pv2-card{aspect-ratio:4/5}
+  .pv2-card-full{height:auto;aspect-ratio:4/5}
+  .pv2-hero-wrap{min-height:auto}
+  .pv2-hero-content{padding:52px 20px 36px}
+  .pv2-hero-model{font-size:34px}
+  .pv2-hero-name{font-size:18px}
+  .pv2-hero-specgrid{grid-template-columns:1fr 1fr}
+  .pv2-hero-btns{flex-direction:column}
+  .pv2-hero-btn-p,.pv2-hero-btn-g{justify-content:center;width:100%}
+  .pv2-hero-zoom-btn{bottom:16px;right:16px;font-size:9px;padding:8px 12px}
+}
+@media(max-width:400px){
+  .pv2-hero-content{padding:48px 16px 32px}
+  .pv2-hero-model{font-size:28px}
+  .pv2-hero-specgrid{grid-template-columns:1fr 1fr}
+}
 </style>
 
 <!-- LIGHTBOX -->
@@ -1120,11 +1178,18 @@ buildScale();buildBtns();selectTemp(600);
         <div id="pv2-lb-name"></div>
         <div id="pv2-lb-temp"></div>
         <div id="pv2-lb-desc"></div>
+        <ul id="pv2-lb-specs"></ul>
       </div>
-      <button id="pv2-lb-wa" onclick="waMsg(currentLBProduct)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Enquire on WhatsApp
-      </button>
+      <div id="pv2-lb-actions">
+        <button id="pv2-lb-wa" onclick="waMsg(currentLBProduct)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enquire on WhatsApp
+        </button>
+        <button id="pv2-lb-share" onclick="shareProduct(currentLBProduct,document.getElementById('pv2-lb-code').textContent,document.getElementById('pv2-lb-temp').textContent)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Share
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -1183,7 +1248,7 @@ var PRODS2=[
   {id:'black',name:'Black Welding Blanket',code:'SSGFG2.0',temp:'900°C',img:'SSGFG.jpeg',desc:'Carbon-infused black surface absorbs radiant heat and repels spatter. Heavy steel fabrication environments.',specs:['900°C peak resistance','Carbon-coated surface','Anti-spatter finish','Steel plant approved']},
   {id:'brown',name:'Brown Welding Blanket',code:'SSMDWB2.5',temp:'1000°C',img:'SSB24.jpg',desc:'Industry workhorse. Handles 1000°C sustained heat across shipyards, pipeline work, and structural fabrication.',specs:['1000°C heat resistance','Double vermiculite coat','Reinforced hem stitching','Pan-India bestseller']},
   {id:'white',name:'White Welding Blanket',code:'SSCF3.0',temp:'1100°C',img:'SSCF.jpeg',desc:'High-purity ceramic-fibre composite for clean environments — pharmaceutical, food-grade, and precision manufacturing.',specs:['1100°C peak rating','Ceramic fibre composite','Clean white surface','Pharma & food grade']},
-  {id:'brownprem',name:'Brown Premium Welding Blanket',code:'SSVCF3.0',temp:'1200°C',img:'SSB30.jpg',desc:'Premium double-coated vermiculite with reinforced fibreglass mesh. Trusted by defence contractors and heavy-duty shipyards.',specs:['1200°C extreme rating','Triple-layer construction','Reinforced mesh core','Defence & marine grade']},
+  {id:'brownprem',name:'Brown Premium Welding Blanket',code:'SSVCF3.0',temp:'1200°C',img:'SSB30.jpeg',desc:'Premium double-coated vermiculite with reinforced fibreglass mesh. Trusted by defence contractors and heavy-duty shipyards.',specs:['1200°C extreme rating','Triple-layer construction','Reinforced mesh core','Defence & marine grade']},
   {id:'nonasb',name:'Non-Asbestos Welding Blanket',code:'SS96HS1.4',temp:'1400°C',img:'SSHSF.jpeg',desc:'1400°C — the highest rating. 100% asbestos-free. Replaces legacy asbestos blankets in foundries, smelters and aerospace.',specs:['1400°C — highest rating','100% asbestos-free','Foundry & smelter approved','Full regulatory compliance']}
 ];
 
@@ -1193,10 +1258,20 @@ function openLB(p){
   img.src=p.img;
   img.alt=p.name;
   img.style.display='block';
-  document.getElementById('pv2-lb-code').textContent=p.code;
+  document.getElementById('pv2-lb-code').innerHTML='<span style="display:inline-block;background:rgba(255,140,0,0.15);border:1px solid rgba(200,145,79,0.5);padding:4px 14px;border-radius:3px;font-family:\'Barlow Condensed\',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#FFB347;font-weight:900;">'+p.code+'</span>';
   document.getElementById('pv2-lb-name').textContent=p.name;
-  document.getElementById('pv2-lb-temp').textContent=p.temp;
+  document.getElementById('pv2-lb-temp').innerHTML='<span style="font-family:\'Black Ops One\',sans-serif;font-size:40px;color:#FF8C00;letter-spacing:1px;display:block;text-shadow:0 0 20px rgba(255,140,0,0.6);border-bottom:1px solid rgba(200,145,79,0.25);padding-bottom:12px;margin-bottom:10px;">'+p.temp+'</span>';
   document.getElementById('pv2-lb-desc').textContent=p.desc;
+  var specsEl=document.getElementById('pv2-lb-specs');
+  if(specsEl){
+    if(p.specs && p.specs.length){
+      specsEl.innerHTML=p.specs.map(function(s){return'<li>'+s+'</li>';}).join('');
+      specsEl.style.display='flex';
+    } else {
+      specsEl.innerHTML='';
+      specsEl.style.display='none';
+    }
+  }
   document.getElementById('pv2-lightbox').classList.add('open');
 }
 function closeLB(){
@@ -1212,7 +1287,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB()});
     var card=document.createElement('div');
     card.className='pv2-card'+(isFull?' pv2-card-full':'');
     card.id='pc-'+p.id;
-    card.onclick=function(e){if(!e.target.closest('button'))openLB({name:p.name,code:p.code,temp:p.temp,img:p.img,desc:p.desc})};
+    card.onclick=(function(prod){return function(e){if(!e.target.closest('button'))openLB({name:prod.name,code:prod.code,temp:prod.temp,img:prod.img,desc:prod.desc,specs:prod.specs});};})(p);
     var shortCode=p.code.replace('SS','').replace(/[0-9.]/g,'').toUpperCase();
     card.innerHTML=
       '<img class="pv2-img" src="'+p.img+'" alt="'+p.name+'" loading="lazy" onerror="this.style.display=\'none\'">'+
@@ -1220,17 +1295,15 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB()});
       '<div class="pv2-base-ov"></div>'+
       '<div class="pv2-temp-badge">'+p.temp+'</div>'+
       '<div class="pv2-bottom">'+
-        '<div class="pv2-code">'+p.code+'</div>'+
+        '<div class="pv2-code" style="display:inline-block;background:rgba(255,140,0,0.18);border:2px solid #FFB347;border-radius:4px;padding:4px 14px;font-size:15px;letter-spacing:3px;color:#FFD700;font-weight:900;text-shadow:0 0 16px rgba(255,200,0,0.9),0 0 4px #000;margin-bottom:8px;box-shadow:0 0 12px rgba(255,140,0,0.4);">'+p.code+'</div>'+
         '<div class="pv2-name">'+p.name+'</div>'+
       '</div>'+
-      '<div class="pv2-reveal">'+
-        '<ul class="pv2-specs-mini">'+p.specs.map(function(s){return'<li>'+s+'</li>'}).join('')+'</ul>'+
+      '<div class="pv2-reveal" style="opacity:0;pointer-events:none;">'+
         '<div class="pv2-cta-row">'+
-          '<button class="pv2-btn-wa" onclick="waMsg(\''+p.name+'\')">'+
-            '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>'+
-            'Enquire'+
+          '<button class="pv2-btn-wa" onclick="event.stopPropagation();shareProduct(\''+p.name+'\',\''+p.code+'\',\''+p.temp+'\')">'+
+            '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>'+
+            'Share'+
           '</button>'+
-          
         '</div>'+
       '</div>';
     grid.appendChild(card);
@@ -1248,13 +1321,86 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB()});
       <p class="sd">From marine fabrication to aerospace — Spark Shield performs where it matters most.</p>
     </div>
   </div>
+  <!-- Application → Product suggestion modal -->
+  <div id="app-modal" style="display:none;position:fixed;inset:0;z-index:99995;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)closeAppModal()">
+    <div style="background:#fff;border-radius:8px;max-width:520px;width:100%;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,0.4);">
+      <div id="app-modal-header" style="padding:24px 28px 16px;border-bottom:1px solid #eee;">
+        <div id="app-modal-label" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#8B5E3C;font-weight:700;margin-bottom:4px;">Recommended For</div>
+        <div id="app-modal-title" style="font-family:'Black Ops One',sans-serif;font-size:24px;color:#1A1A1A;"></div>
+      </div>
+      <div id="app-modal-products" style="padding:16px 28px;display:flex;flex-direction:column;gap:12px;max-height:60vh;overflow-y:auto;"></div>
+      <div style="padding:14px 28px;border-top:1px solid #eee;display:flex;gap:10px;justify-content:flex-end;">
+        <button onclick="closeAppModal()" style="background:transparent;border:1px solid #ccc;color:#666;padding:10px 22px;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;">Close</button>
+        <button onclick="closeAppModal();s2('products')" style="background:#8B5E3C;color:#fff;border:none;padding:10px 22px;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;">View All Products</button>
+      </div>
+    </div>
+  </div>
+  <script>
+  var APP_PRODUCTS={
+    shipyard:[
+      {code:'SSVCF3.0',name:'Brown Premium Welding Blanket',temp:'1200°C',why:'Double vermiculite coating handles marine hot work and offshore spark exposure.'},
+      {code:'SS96HS1.4',name:'Non-Asbestos Welding Blanket',temp:'1400°C',why:'Highest-rated asbestos-free option for extreme shipyard fabrication environments.'},
+      {code:'SSMDWB2.5',name:'Brown Welding Blanket',temp:'1000°C',why:'Industry workhorse trusted across Indian shipyards for sustained welding ops.'}
+    ],
+    steel:[
+      {code:'SSGFG2.0',name:'Black Welding Blanket',temp:'900°C',why:'Carbon surface absorbs radiant heat from structural steel welding and cutting.'},
+      {code:'SSMDWB2.5',name:'Brown Welding Blanket',temp:'1000°C',why:'Handles sustained heat in steel construction — protects adjacent structures.'},
+      {code:'SSVCF3.0',name:'Brown Premium Welding Blanket',temp:'1200°C',why:'For high-heat structural steel operations requiring extra protection margin.'}
+    ],
+    manufacturing:[
+      {code:'SSVCF3.0',name:'Brown Premium Welding Blanket',temp:'1200°C',why:'Triple-layer construction for heavy industrial production environments.'},
+      {code:'SS96HS1.4',name:'Non-Asbestos Welding Blanket',temp:'1400°C',why:'Foundry and smelter approved — replaces legacy asbestos in heavy manufacturing.'},
+      {code:'SSGFG2.0',name:'Black Welding Blanket',temp:'900°C',why:'Anti-spatter surface ideal for high-visibility heavy manufacturing bays.'}
+    ],
+    automotive:[
+      {code:'SSCFB0.6',name:'Car Fire Blanket',temp:'900°C',why:'Designed specifically for automotive workshops — rapid deploy for vehicle fire suppression.'},
+      {code:'SSFG2.0',name:'Grinding Blanket',temp:'600°C',why:'Perfect for body shop grinding and cutting work — lightweight and flexible.'},
+      {code:'SSSFG1.0',name:'Non-Itchy Welding Blanket',temp:'800°C',why:'Skin-friendly for automotive technicians working bare-handed in tight spaces.'}
+    ],
+    pipeline:[
+      {code:'SSMDWB2.5',name:'Brown Welding Blanket',temp:'1000°C',why:'Pan-India bestseller for field pipeline welding — durable in outdoor conditions.'},
+      {code:'SSVCF3.0',name:'Brown Premium Welding Blanket',temp:'1200°C',why:'For high-pressure pipeline hot work requiring superior heat protection.'},
+      {code:'SSGFG2.0',name:'Black Welding Blanket',temp:'900°C',why:'Anti-spatter for pipeline joint welding where clean work zones are required.'}
+    ],
+    defence:[
+      {code:'SS96HS1.4',name:'Non-Asbestos Welding Blanket',temp:'1400°C',why:'Aerospace and defence grade — maximum rating, fully compliant, asbestos-free.'},
+      {code:'SSVCF3.0',name:'Brown Premium Welding Blanket',temp:'1200°C',why:'Defence contractor tested — reinforced mesh core for precision-critical environments.'},
+      {code:'SSCF3.0',name:'White Welding Blanket',temp:'1100°C',why:'Clean ceramic composite for defence manufacturing and precision aerospace work.'}
+    ]
+  };
+  function openAppModal(key,title){
+    var modal=document.getElementById('app-modal');
+    document.getElementById('app-modal-title').textContent=title;
+    var products=APP_PRODUCTS[key]||[];
+    var html=products.map(function(p){
+      return '<div style="display:flex;gap:14px;align-items:flex-start;padding:14px;background:#F9F7F4;border:1px solid #E0D9CF;border-left:3px solid #8B5E3C;border-radius:2px;">'
+        +'<div style="flex:1;min-width:0;">'
+        +'<div style="font-family:\'Barlow Condensed\',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#8B5E3C;font-weight:800;margin-bottom:2px;">'+p.code+'</div>'
+        +'<div style="font-family:\'Black Ops One\',sans-serif;font-size:16px;color:#1A1A1A;margin-bottom:3px;">'+p.name+'</div>'
+        +'<div style="font-size:12px;color:#6F6B66;line-height:1.6;">'+p.why+'</div>'
+        +'</div>'
+        +'<div style="text-align:right;flex-shrink:0;">'
+        +'<div style="font-family:\'Black Ops One\',sans-serif;font-size:20px;color:#E8620A;">'+p.temp+'</div>'
+        +'<button onclick="waMsg(\''+p.name+'\');closeAppModal()" style="margin-top:6px;background:#8B5E3C;color:#fff;border:none;padding:6px 12px;border-radius:2px;font-family:\'Barlow Condensed\',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;cursor:pointer;white-space:nowrap;">Enquire</button>'
+        +'</div>'
+        +'</div>';
+    }).join('');
+    document.getElementById('app-modal-products').innerHTML=html;
+    modal.style.display='flex';
+  }
+  function closeAppModal(){
+    document.getElementById('app-modal').style.display='none';
+  }
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAppModal();});
+  </script>
+
   <div class="usage-grid rv">
-    <div class="uc"><img src="https://images.pexels.com/photos/5362681/pexels-photo-5362681.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Shipyard" loading="lazy"><div class="uc-ov"></div><div class="uc-c"><div class="uc-num">01</div><div class="uc-t">Shipyard Fabrication</div><div class="uc-s">Marine-grade protection for offshore work</div></div></div>
-    <div class="uc"><img src="https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Steel" loading="lazy"><div class="uc-ov"></div><div class="uc-c"><div class="uc-num">02</div><div class="uc-t">Steel Construction</div><div class="uc-s">Protect adjacent structures from sparks</div></div></div>
-    <div class="uc"><img src="https://images.pexels.com/photos/2760343/pexels-photo-2760343.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Manufacturing" loading="lazy"><div class="uc-ov"></div><div class="uc-c"><div class="uc-num">03</div><div class="uc-t">Heavy Manufacturing</div><div class="uc-s">Industrial-scale blanket protection</div></div></div>
-    <div class="uc"><img src="https://images.pexels.com/photos/2760344/pexels-photo-2760344.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Automotive" loading="lazy"><div class="uc-ov"></div><div class="uc-c"><div class="uc-num">04</div><div class="uc-t">Automotive Repair</div><div class="uc-s">Keep work areas safe from heat damage</div></div></div>
-    <div class="uc"><img src="https://images.pexels.com/photos/3862132/pexels-photo-3862132.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Pipeline" loading="lazy" onerror="this.src='https://images.pexels.com/photos/5362681/pexels-photo-5362681.jpeg?auto=compress&cs=tinysrgb&w=700'"><div class="uc-ov"></div><div class="uc-c"><div class="uc-num">05</div><div class="uc-t">Pipeline Industry</div><div class="uc-s">Field welding &amp; hot work protection</div></div></div>
-    <div class="uc"><img src="https://images.pexels.com/photos/15888226/pexels-photo-15888226.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Defence" loading="lazy"><div class="uc-ov"></div><div class="uc-c"><div class="uc-num">06</div><div class="uc-t">Defence &amp; Aerospace</div><div class="uc-s">Precision-critical environment safety</div></div></div>
+    <div class="uc" onclick="openAppModal('shipyard','Shipyard Fabrication')" style="cursor:pointer;"><img src="https://images.pexels.com/photos/5362681/pexels-photo-5362681.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Shipyard" loading="lazy"><div class="uc-ov"></div><div class="uc-c"><div class="uc-num">01</div><div class="uc-t">Shipyard Fabrication</div><div class="uc-s">Marine-grade protection for offshore work</div><div style="margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,145,79,0.9);font-weight:700;">Tap to see products →</div></div></div>
+    <div class="uc" onclick="openAppModal('steel','Steel Construction')" style="cursor:pointer;"><img src="https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Steel" loading="lazy"><div class="uc-ov"></div><div class="uc-c"><div class="uc-num">02</div><div class="uc-t">Steel Construction</div><div class="uc-s">Protect adjacent structures from sparks</div><div style="margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,145,79,0.9);font-weight:700;">Tap to see products →</div></div></div>
+    <div class="uc" onclick="openAppModal('manufacturing','Heavy Manufacturing')" style="cursor:pointer;"><img src="https://images.pexels.com/photos/2760343/pexels-photo-2760343.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Manufacturing" loading="lazy"><div class="uc-ov"></div><div class="uc-c"><div class="uc-num">03</div><div class="uc-t">Heavy Manufacturing</div><div class="uc-s">Industrial-scale blanket protection</div><div style="margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,145,79,0.9);font-weight:700;">Tap to see products →</div></div></div>
+    <div class="uc" onclick="openAppModal('automotive','Automotive Repair')" style="cursor:pointer;"><img src="https://images.pexels.com/photos/2760344/pexels-photo-2760344.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Automotive" loading="lazy"><div class="uc-ov"></div><div class="uc-c"><div class="uc-num">04</div><div class="uc-t">Automotive Repair</div><div class="uc-s">Keep work areas safe from heat damage</div><div style="margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,145,79,0.9);font-weight:700;">Tap to see products →</div></div></div>
+    <div class="uc" onclick="openAppModal('pipeline','Pipeline Industry')" style="cursor:pointer;"><img src="https://images.pexels.com/photos/3862132/pexels-photo-3862132.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Pipeline" loading="lazy" onerror="this.src='https://images.pexels.com/photos/5362681/pexels-photo-5362681.jpeg?auto=compress&cs=tinysrgb&w=700'"><div class="uc-ov"></div><div class="uc-c"><div class="uc-num">05</div><div class="uc-t">Pipeline Industry</div><div class="uc-s">Field welding &amp; hot work protection</div><div style="margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,145,79,0.9);font-weight:700;">Tap to see products →</div></div></div>
+    <div class="uc" onclick="openAppModal('defence','Defence & Aerospace')" style="cursor:pointer;"><img src="https://images.pexels.com/photos/15888226/pexels-photo-15888226.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Defence" loading="lazy"><div class="uc-ov"></div><div class="uc-c"><div class="uc-num">06</div><div class="uc-t">Defence &amp; Aerospace</div><div class="uc-s">Precision-critical environment safety</div><div style="margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,145,79,0.9);font-weight:700;">Tap to see products →</div></div></div>
   </div>
 </section>
 
@@ -1442,11 +1588,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB()});
     <div class="ft-grid2">
       <div>
         <img src="spark-shiled.png" class="ft-logo-img" alt="SparkShield Logo"><br><br>
-        <div class="ft-about">India's trusted manufacturer of vermiculite-coated welding blankets for industrial, marine, and construction applications. Quality that stands the heat.</div>
-        <button class="ft-wa" onclick="waMsg('general')">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Chat on WhatsApp
-        </button>
+        
       </div>
       <div>
         <div class="ft-col-t">Products</div>
@@ -1494,271 +1636,24 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB()});
   </div>
 </footer>
 
-<section id="arc-demo" style="background:#0a0a0a;padding:80px 60px;text-align:center;position:relative;z-index:2">
+<section style="background:#0a0a0a;padding:80px 60px 60px;text-align:center;position:relative;z-index:2">
   <div style="max-width:900px;margin:0 auto 40px">
     <div class="ey" style="color:var(--gold);justify-content:center">Live Demo</div>
     <h2 class="st" style="color:#fff">FEEL THE ARC</h2>
-    <p class="sd" style="margin:0 auto;color:rgba(255,255,255,.75)">Move your cursor across the canvas to ignite a live arc weld simulation.</p>
+    <p class="sd" style="margin:0 auto;color:rgba(255,255,255,.75)">Draw anything on the canvas — it glows then fades like cooling metal.</p>
   </div>
-  <canvas id="weld-canvas" style="width:100%;max-width:100%;height:420px;border-radius:4px;border:1px solid rgba(139,94,60,.3);display:block;margin:0 auto;touch-action:none"></canvas>
-  <div style="margin-top:18px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:600">Move your cursor across the canvas ↑</div>
+  <div id="wc-wrap" style="max-width:100%;margin:0 -60px;">
+    <div id="wc-toolbar">
+      <button id="btn-draw" class="active" onclick="setMode('draw')">✏ Draw</button>
+      <button id="btn-erase" onclick="setMode('erase')">◻ Erase</button>
+      <div class="wc-sep"></div>
+      <button onclick="clearAll()">⟳ Clear</button>
+      <span id="wc-mode-label">DRAW MODE</span>
+    </div>
+    <canvas id="weld-canvas"></canvas>
+    <div id="wc-hint">Draw / write anything — it glows then fades like cooling metal ↑</div>
+  </div>
 </section>
-
-<script>
-(function(){
-  const canvas = document.getElementById('weld-canvas');
-  const ctx = canvas.getContext('2d');
-
-  function resize(){
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  let mouse = { x: canvas.width/2, y: canvas.height/2, active: false };
-  let particles = [];
-  let spatter = [];
-  let time = 0;
-
-  canvas.addEventListener('mousemove', e => {
-    const r = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - r.left;
-    mouse.y = e.clientY - r.top;
-    mouse.active = true;
-  });
-  canvas.addEventListener('mouseenter', () => mouse.active = true);
-  canvas.addEventListener('mouseleave', () => mouse.active = false);
-  canvas.addEventListener('touchmove', e => {
-    e.preventDefault();
-    const r = canvas.getBoundingClientRect();
-    mouse.x = e.touches[0].clientX - r.left;
-    mouse.y = e.touches[0].clientY - r.top;
-    mouse.active = true;
-  }, { passive: false });
-
-  // Spark particle
-  function spawnSpark(x, y){
-    const count = 6 + Math.floor(Math.random()*6);
-    for(let i=0;i<count;i++){
-      const angle = Math.random() * Math.PI * 2;
-      const speed = 1.5 + Math.random() * 5;
-      particles.push({
-        x, y,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed - 2,
-        life: 1,
-        decay: 0.02 + Math.random() * 0.04,
-        size: 0.8 + Math.random() * 2.2,
-        color: ['#FFD700','#FF8C00','#FF4500','#FFA500','#FFFFFF'][Math.floor(Math.random()*5)]
-      });
-    }
-  }
-
-  // Spatter blob
-  function spawnSpatter(x, y){
-    if(Math.random() > 0.08) return;
-    const angle = Math.random() * Math.PI * 2;
-    const speed = 3 + Math.random() * 8;
-    spatter.push({
-      x, y,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed - 3,
-      life: 1,
-      decay: 0.008 + Math.random() * 0.012,
-      size: 2 + Math.random() * 4,
-      color: '#FF4500'
-    });
-  }
-
-  // Draw arc lightning bolt between two points
-  function drawArc(x1,y1,x2,y2,jagged,alpha){
-    ctx.save();
-    ctx.globalAlpha = alpha;
-    ctx.strokeStyle = '#fff';
-    ctx.lineWidth = 1.5;
-    ctx.shadowBlur = 18;
-    ctx.shadowColor = '#88CCFF';
-    ctx.beginPath();
-    ctx.moveTo(x1,y1);
-    const steps = 8;
-    let px = x1, py = y1;
-    for(let i=1;i<=steps;i++){
-      const t = i/steps;
-      const nx = x1 + (x2-x1)*t + (Math.random()-0.5)*jagged;
-      const ny = y1 + (y2-y1)*t + (Math.random()-0.5)*jagged;
-      ctx.lineTo(nx, ny);
-      px=nx; py=ny;
-    }
-    ctx.stroke();
-    // glow pass
-    ctx.globalAlpha = alpha * 0.3;
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = '#44AAFF';
-    ctx.stroke();
-    ctx.restore();
-  }
-
-  function drawArcCore(x, y){
-    // Core white-hot point
-    const g = ctx.createRadialGradient(x,y,0,x,y,18);
-    g.addColorStop(0,'rgba(255,255,255,1)');
-    g.addColorStop(0.15,'rgba(255,240,180,.95)');
-    g.addColorStop(0.4,'rgba(255,140,0,.6)');
-    g.addColorStop(1,'rgba(255,80,0,0)');
-    ctx.save();
-    ctx.globalAlpha = 0.92;
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.arc(x,y,18,0,Math.PI*2);
-    ctx.fill();
-    ctx.restore();
-
-    // Outer glow
-    const g2 = ctx.createRadialGradient(x,y,0,x,y,60);
-    g2.addColorStop(0,'rgba(255,180,50,.35)');
-    g2.addColorStop(1,'rgba(255,80,0,0)');
-    ctx.save();
-    ctx.globalAlpha = 0.5 + 0.3*Math.sin(time*0.3);
-    ctx.fillStyle = g2;
-    ctx.beginPath();
-    ctx.arc(x,y,60,0,Math.PI*2);
-    ctx.fill();
-    ctx.restore();
-  }
-
-  function drawWeldPool(x, y){
-    // Molten pool below arc
-    const py = y + 8;
-    const g = ctx.createRadialGradient(x,py,0,x,py,22);
-    g.addColorStop(0,'rgba(255,200,50,0.9)');
-    g.addColorStop(0.5,'rgba(255,100,0,0.5)');
-    g.addColorStop(1,'rgba(255,50,0,0)');
-    ctx.save();
-    ctx.globalAlpha = 0.7;
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.ellipse(x, py, 22, 12, 0, 0, Math.PI*2);
-    ctx.fill();
-    ctx.restore();
-  }
-
-  // Ambient background heat haze
-  function drawHaze(x, y){
-    const g = ctx.createRadialGradient(x,y,0,x,y,180);
-    g.addColorStop(0,'rgba(255,100,20,0.07)');
-    g.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.save();
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.arc(x,y,180,0,Math.PI*2);
-    ctx.fill();
-    ctx.restore();
-  }
-
-  // Trail left on surface
-  const trail = [];
-  function addTrail(x,y){
-    trail.push({x,y,alpha:0.6});
-    if(trail.length > 120) trail.shift();
-  }
-  function drawTrail(){
-    for(let i=0;i<trail.length;i++){
-      const t = trail[i];
-      t.alpha *= 0.985;
-      ctx.save();
-      ctx.globalAlpha = t.alpha * (i/trail.length);
-      ctx.fillStyle = '#FF6600';
-      ctx.shadowBlur = 6;
-      ctx.shadowColor = '#FF4400';
-      ctx.beginPath();
-      ctx.arc(t.x, t.y, 2, 0, Math.PI*2);
-      ctx.fill();
-      ctx.restore();
-    }
-  }
-
-  function loop(){
-    time++;
-    // Dark fade for trail persistence
-    ctx.fillStyle = 'rgba(10,10,10,0.38)';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-
-    if(mouse.active){
-      addTrail(mouse.x, mouse.y);
-      drawTrail();
-      drawHaze(mouse.x, mouse.y);
-      drawWeldPool(mouse.x, mouse.y);
-
-      // Random arc bolts around the tip
-      if(Math.random() > 0.3){
-        const ex = mouse.x + (Math.random()-0.5)*40;
-        const ey = mouse.y + (Math.random()-0.5)*40;
-        drawArc(mouse.x, mouse.y, ex, ey, 14, 0.5+Math.random()*0.5);
-      }
-
-      drawArcCore(mouse.x, mouse.y);
-      spawnSpark(mouse.x, mouse.y);
-      spawnSpatter(mouse.x, mouse.y);
-    } else {
-      drawTrail();
-    }
-
-    // Update & draw particles
-    particles = particles.filter(p => p.life > 0);
-    for(const p of particles){
-      p.x += p.vx;
-      p.y += p.vy;
-      p.vy += 0.18; // gravity
-      p.vx *= 0.97;
-      p.life -= p.decay;
-      ctx.save();
-      ctx.globalAlpha = p.life;
-      ctx.fillStyle = p.color;
-      ctx.shadowBlur = 4;
-      ctx.shadowColor = p.color;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-      ctx.fill();
-      ctx.restore();
-    }
-
-    // Update & draw spatter
-    spatter = spatter.filter(s => s.life > 0);
-    for(const s of spatter){
-      s.x += s.vx;
-      s.y += s.vy;
-      s.vy += 0.25;
-      s.vx *= 0.96;
-      s.life -= s.decay;
-      ctx.save();
-      ctx.globalAlpha = s.life;
-      ctx.fillStyle = s.color;
-      ctx.shadowBlur = 8;
-      ctx.shadowColor = '#FF6600';
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
-      ctx.fill();
-      ctx.restore();
-    }
-
-    requestAnimationFrame(loop);
-  }
-  loop();
-})();
-</script>
-
-<div id="wc-wrap">
-  <div id="wc-toolbar">
-    <button id="btn-draw" class="active" onclick="setMode('draw')">✏ Draw</button>
-    <button id="btn-erase" onclick="setMode('erase')">◻ Erase</button>
-    <div class="wc-sep"></div>
-    <button onclick="clearAll()">⟳ Clear</button>
-    <span id="wc-mode-label">DRAW MODE</span>
-  </div>
-  <canvas id="weld-canvas"></canvas>
-  <div id="wc-hint">Draw / write anything — it glows then fades like cooling metal ↑</div>
-</div>
 
 <script>
 (function(){
@@ -2338,18 +2233,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB()});
 })();
 </script>
 
-<script>
-(function initWeld(){
-  const canvas = document.getElementById('weld-canvas');
-  canvas.width = canvas.getBoundingClientRect().width || 900;
-  canvas.height = 420;
-  window.addEventListener('resize', () => {
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-  });
-  // ArcWeldEffect removed - handled by canvas scripts above
-})();
-</script>
+
 
 <script>
 /* ══════════════════════════════════════════
@@ -2514,6 +2398,15 @@ function s2(id){
 ══════════════════════════════════════════ */
 const WA_NUMBER = '917567679456'; // ← Replace with your number
 
+function shareProduct(name, code, temp){
+  var text = '🔥 Check out this product from Spark Shield!\n\n*'+name+'*\nModel: '+code+'\nHeat Rating: '+temp+'\n\nLearn more: https://www.sparkshield.co.in';
+  if(navigator.share){
+    navigator.share({title:'Spark Shield – '+name,text:text,url:'https://www.sparkshield.co.in'}).catch(function(){});
+  } else {
+    var wa='https://wa.me/?text='+encodeURIComponent(text);
+    window.open(wa,'_blank');
+  }
+}
 function waMsg(product){
   let msg = '';
   if(product === 'general'){
@@ -2547,12 +2440,12 @@ function sendWA(){
    TESTIMONIALS DATA + INJECT
 ══════════════════════════════════════════ */
 const testimonials = [
-  { name:'Ramesh Patel', role:'Procurement Manager, Adani Ports', initials:'RP', stars:5, text:'Spark Shield SSB30 has been our standard across all our shipyard welding bays for two years. Zero failures, zero complaints from our operators. The heat resistance is exactly as advertised.' },
-  { name:'Sunil Verma', role:'Safety Officer, L&T Hydrocarbon', initials:'SV', stars:5, text:'We switched from imported blankets to Spark Shield and couldn\'t be happier. Same quality, half the cost, and delivery anywhere in India within days. The SSB30 Premium is outstanding.' },
-  { name:'Mohammed Farouk', role:'Welding Supervisor, Mazagon Dock', initials:'MF', stars:5, text:'In a shipyard environment you need blankets that actually hold. These do. SSB30 handles everything we throw at it — and we throw a lot. Highly recommended for heavy marine work.' },
-  { name:'Priya Nair', role:'Owner, PN Fabrication Works', initials:'PN', stars:5, text:'Ordered SSB24 for our workshop. Very impressed with the quality. Price is great for small businesses and delivery was fast. Will be ordering SSB30 next for our bigger contracts.' },
-  { name:'Arvind Kapoor', role:'HSE Manager, HPCL Refinery', initials:'AK', stars:5, text:'We mandate certified welding blankets on all hot work permits. Spark Shield consistently passes our quality audit checks. The team is responsive and bulk pricing is very competitive.' },
-  { name:'Kiran Shah', role:'Director, Shah Steel Fabricators', initials:'KS', stars:5, text:'Family business running 30 years. We\'ve tried every brand in the market. Spark Shield SSB30 is simply the best vermiculite blanket made in India. The double coating makes all the difference.' },
+  { name:'Ramesh Patel', role:'Purchase Manager, Bhavnagar Ship Breaking Yard', initials:'RP', stars:5, text:'Spark Shield SSB30 has been our standard across all our welding bays for two years. Zero failures, zero complaints from our operators. The heat resistance is exactly as advertised.' },
+  { name:'Sunil Verma', role:'Safety Supervisor, Surat Steel Fabricators', initials:'SV', stars:5, text:'We switched from imported blankets to Spark Shield and couldn\'t be happier. Same quality, half the cost, and delivery anywhere in India within days. The SSB30 Premium is outstanding.' },
+  { name:'Mohammed Farouk', role:'Welding Foreman, Mangalore Port Contractors', initials:'MF', stars:5, text:'In a port environment you need blankets that actually hold. These do. SSB30 handles everything we throw at it — and we throw a lot. Highly recommended for heavy marine work.' },
+  { name:'Priya Nair', role:'Owner, PN Fabrication Works, Pune', initials:'PN', stars:5, text:'Ordered SSB24 for our workshop. Very impressed with the quality. Price is great for small businesses and delivery was fast. Will be ordering SSB30 next for our bigger contracts.' },
+  { name:'Arvind Kapoor', role:'HSE Officer, Rajkot Industrial Contractors', initials:'AK', stars:5, text:'We mandate certified welding blankets on all hot work permits. Spark Shield consistently passes our quality checks. The team is responsive and bulk pricing is very competitive.' },
+  { name:'Kiran Shah', role:'Director, Shah Steel Works, Ahmedabad', initials:'KS', stars:5, text:'Family business running 30 years. We\'ve tried every brand in the market. Spark Shield SSB30 is simply the best vermiculite blanket made in India. The double coating makes all the difference.' },
 ];
 (function buildTestimonials(){
   const track = document.getElementById('testiTrack');
@@ -2574,8 +2467,6 @@ const testimonials = [
 </script>
 <script src="js/blog-config.js"></script>
 <script src="js/blog-ui.js"></script>
-
-
 </body>
 </html>
 

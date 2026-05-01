@@ -170,22 +170,10 @@ function triggerReveal() {
   var style = document.createElement('style');
   style.id = 'ss-blog-ui-styles';
   style.textContent = '\
-/* ── keyframe for card entry ── */\
-@keyframes blCardIn{\
-  from{opacity:0;transform:translateY(28px)}\
-  to  {opacity:1;transform:translateY(0)}\
-}\
+@keyframes blCardIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}\
 \
-/* ── grid ── */\
-.bl-grid{\
-  display:grid;\
-  grid-template-columns:repeat(3,1fr);\
-  gap:20px;\
-  margin-top:64px;\
-}\
+.bl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:64px}\
 \
-/* ── card shell ── */\
-/* NOTE: NO opacity:0 here — cards are always visible */\
 .bl-card{\
   background:var(--surface,#fff);\
   border:1px solid var(--border,#E0D9CF);\
@@ -194,28 +182,19 @@ function triggerReveal() {
   display:flex;\
   flex-direction:column;\
   position:relative;\
-  /* animate in with own keyframe, not .rv/.on */\
   animation:blCardIn .55s ease both;\
-  transition:\
-    transform .4s cubic-bezier(.25,.46,.45,.94),\
-    border-color .4s,\
-    box-shadow .4s;\
+  transition:transform .4s cubic-bezier(.25,.46,.45,.94),border-color .4s,box-shadow .4s;\
 }\
-/* stagger the 3 cards */\
 .bl-card:nth-child(1){animation-delay:.05s}\
 .bl-card:nth-child(2){animation-delay:.15s}\
 .bl-card:nth-child(3){animation-delay:.25s}\
 \
-/* top accent line */\
 .bl-card::before{\
   content:"";\
-  position:absolute;\
-  top:0;left:0;right:0;\
+  position:absolute;top:0;left:0;right:0;\
   height:3px;\
   background:linear-gradient(90deg,transparent,var(--accent,#8B5E3C),transparent);\
-  opacity:0;\
-  transition:opacity .5s;\
-  z-index:3;\
+  opacity:0;transition:opacity .5s;z-index:3;\
 }\
 .bl-card:hover::before{opacity:1}\
 .bl-card:hover{\
@@ -228,176 +207,86 @@ function triggerReveal() {
   background:linear-gradient(160deg,rgba(139,94,60,.04) 0%,var(--surface,#fff) 60%);\
 }\
 \
-/* ── image area ── */\
 .bl-img{\
-  display:block;\
-  height:195px;\
-  overflow:hidden;\
-  position:relative;\
-  flex-shrink:0;\
-  text-decoration:none;\
-  background:var(--surface2,#F2EEE9);\
+  display:block;height:195px;overflow:hidden;position:relative;\
+  flex-shrink:0;text-decoration:none;background:var(--surface2,#F2EEE9);\
 }\
-.bl-img img{\
-  width:100%;height:100%;\
-  object-fit:cover;\
-  filter:brightness(.75) saturate(.88);\
-  transition:transform .55s ease,filter .55s ease;\
-}\
-.bl-card:hover .bl-img img{\
-  transform:scale(1.06);\
-  filter:brightness(.86) saturate(1);\
-}\
-.bl-img-placeholder{\
-  width:100%;height:100%;\
-  display:flex;align-items:center;justify-content:center;\
-}\
-.bl-img-ov{\
-  position:absolute;inset:0;\
-  background:linear-gradient(135deg,rgba(139,94,60,.1),transparent);\
-  transition:background .4s;\
-  pointer-events:none;\
-}\
-.bl-card:hover .bl-img-ov{\
-  background:linear-gradient(135deg,rgba(139,94,60,.22),transparent);\
-}\
+.bl-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.75) saturate(.88);transition:transform .55s ease,filter .55s ease}\
+.bl-card:hover .bl-img img{transform:scale(1.06);filter:brightness(.86) saturate(1)}\
+.bl-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center}\
+.bl-img-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(139,94,60,.1),transparent);transition:background .4s;pointer-events:none}\
+.bl-card:hover .bl-img-ov{background:linear-gradient(135deg,rgba(139,94,60,.22),transparent)}\
 .bl-tag{\
-  position:absolute;\
-  bottom:12px;left:14px;\
-  font-family:"Barlow Condensed",sans-serif;\
-  font-size:9px;font-weight:700;\
-  letter-spacing:3px;text-transform:uppercase;\
-  color:#fff;\
-  background:var(--accent,#8B5E3C);\
-  padding:4px 10px;\
-  border-radius:2px;\
-  pointer-events:none;\
-  z-index:2;\
+  position:absolute;bottom:12px;left:14px;\
+  font-family:"Barlow Condensed",sans-serif;font-size:9px;font-weight:700;\
+  letter-spacing:3px;text-transform:uppercase;color:#fff;\
+  background:var(--accent,#8B5E3C);padding:4px 10px;border-radius:2px;\
+  pointer-events:none;z-index:2;\
 }\
 \
-/* ── body ── */\
-.bl-body{\
-  padding:22px 20px 18px;\
-  flex:1;\
-  display:flex;\
-  flex-direction:column;\
-  gap:10px;\
-}\
+.bl-body{padding:22px 20px 18px;flex:1;display:flex;flex-direction:column;gap:10px}\
 .bl-t{\
-  font-family:"Bebas Neue",sans-serif;\
-  font-size:21px;\
-  letter-spacing:1px;\
-  line-height:1.1;\
-  color:var(--text,#1A1A1A);\
-  text-decoration:none;\
-  display:block;\
-  transition:color .2s;\
+  font-family:"Bebas Neue",sans-serif;font-size:21px;letter-spacing:1px;line-height:1.1;\
+  color:var(--text,#1A1A1A);text-decoration:none;display:block;transition:color .2s;\
 }\
 .bl-t:hover{color:var(--accent,#8B5E3C)}\
-.bl-ex{\
-  font-family:"Barlow",sans-serif;\
-  font-size:12.5px;\
-  color:var(--muted,#6F6B66);\
-  line-height:1.78;\
-  flex:1;\
-}\
+.bl-ex{font-family:"Barlow",sans-serif;font-size:12.5px;color:var(--muted,#6F6B66);line-height:1.78;flex:1}\
 .bl-lnk{\
-  display:inline-flex;\
-  align-items:center;\
-  gap:6px;\
-  font-family:"Barlow Condensed",sans-serif;\
-  font-size:10px;font-weight:700;\
+  display:inline-flex;align-items:center;gap:6px;\
+  font-family:"Barlow Condensed",sans-serif;font-size:10px;font-weight:700;\
   letter-spacing:2.5px;text-transform:uppercase;\
-  color:var(--accent,#8B5E3C);\
-  text-decoration:none;\
-  transition:gap .3s,color .2s;\
-  margin-top:auto;\
-  width:fit-content;\
+  color:var(--accent,#8B5E3C);text-decoration:none;\
+  transition:gap .3s,color .2s;margin-top:auto;width:fit-content;\
 }\
 .bl-lnk:hover{gap:12px;color:var(--fire,#E8620A)}\
 .bl-lnk svg{flex-shrink:0;transition:transform .3s}\
 .bl-lnk:hover svg{transform:translateX(2px)}\
 \
-/* ── footer meta bar ── */\
 .bl-foot{\
-  display:flex;\
-  align-items:center;\
-  gap:7px;\
-  padding:11px 20px;\
+  display:flex;align-items:center;gap:7px;padding:11px 20px;\
   border-top:1px solid var(--border,#E0D9CF);\
-  font-family:"Barlow Condensed",sans-serif;\
-  font-size:11px;font-weight:600;\
-  letter-spacing:.5px;\
-  color:var(--muted2,#9A948C);\
+  font-family:"Barlow Condensed",sans-serif;font-size:11px;font-weight:600;\
+  letter-spacing:.5px;color:var(--muted2,#9A948C);\
 }\
 .bl-foot svg{flex-shrink:0;opacity:.6}\
-.bl-dot{\
-  width:3px;height:3px;\
-  border-radius:50%;\
-  background:var(--border2,#CBBBA5);\
-  flex-shrink:0;\
-}\
+.bl-dot{width:3px;height:3px;border-radius:50%;background:var(--border2,#CBBBA5);flex-shrink:0}\
 .bl-date{margin-left:auto}\
 \
-/* ── skeleton loader ── */\
-.bl-card--skeleton{\
-  pointer-events:none;\
-  /* override the entry animation for skeletons */\
-  animation:none;\
-  opacity:1;\
-}\
+.bl-card--skeleton{pointer-events:none;animation:none;opacity:1}\
 .skel-img{\
   height:195px;\
-  background:linear-gradient(90deg,\
-    var(--surface2,#F2EEE9) 25%,\
-    var(--surface3,#EAE4DD) 50%,\
-    var(--surface2,#F2EEE9) 75%);\
-  background-size:200% 100%;\
-  animation:skelShimmer 1.6s infinite;\
+  background:linear-gradient(90deg,var(--surface2,#F2EEE9) 25%,var(--surface3,#EAE4DD) 50%,var(--surface2,#F2EEE9) 75%);\
+  background-size:200% 100%;animation:skelShimmer 1.6s infinite;\
 }\
 .skel-line{\
   height:14px;border-radius:2px;\
-  background:linear-gradient(90deg,\
-    var(--surface2,#F2EEE9) 25%,\
-    var(--surface3,#EAE4DD) 50%,\
-    var(--surface2,#F2EEE9) 75%);\
-  background-size:200% 100%;\
-  animation:skelShimmer 1.6s infinite;\
-  margin-bottom:10px;\
+  background:linear-gradient(90deg,var(--surface2,#F2EEE9) 25%,var(--surface3,#EAE4DD) 50%,var(--surface2,#F2EEE9) 75%);\
+  background-size:200% 100%;animation:skelShimmer 1.6s infinite;margin-bottom:10px;\
 }\
 .skel-line--md{width:70%}\
 .skel-line--sm{width:45%}\
-@keyframes skelShimmer{\
-  0%  {background-position:200% 0}\
-  100%{background-position:-200% 0}\
-}\
+@keyframes skelShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}\
 \
-/* ── empty / error states ── */\
-.blog-empty-state,\
-.blog-error-state{\
-  grid-column:1/-1;\
-  display:flex;flex-direction:column;\
-  align-items:center;gap:16px;\
-  padding:64px 24px;text-align:center;\
-  font-family:"Barlow Condensed",sans-serif;\
-  font-size:13px;letter-spacing:1px;\
+.blog-empty-state,.blog-error-state{\
+  grid-column:1/-1;display:flex;flex-direction:column;\
+  align-items:center;gap:16px;padding:64px 24px;text-align:center;\
+  font-family:"Barlow Condensed",sans-serif;font-size:13px;letter-spacing:1px;\
   color:var(--muted,#6F6B66);\
 }\
+.blog-empty-state p,.blog-error-state p{font-size:14px;margin-top:8px}\
 .btn-retry{\
-  background:var(--accent,#8B5E3C);\
-  color:#fff;border:none;border-radius:2px;\
-  padding:10px 24px;\
-  font-family:"Barlow Condensed",sans-serif;\
-  font-size:10px;font-weight:700;\
-  letter-spacing:2.5px;text-transform:uppercase;\
-  cursor:pointer;\
-  transition:background .3s,transform .2s;\
+  background:var(--accent,#8B5E3C);color:#fff;border:none;border-radius:2px;\
+  padding:10px 24px;font-family:"Barlow Condensed",sans-serif;\
+  font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;\
+  cursor:pointer;transition:background .3s,transform .2s;\
 }\
 .btn-retry:hover{background:var(--fire,#E8620A);transform:translateY(-2px)}\
-\
-/* ── responsive ── */\
+.bl-card--offline{\
+  background:linear-gradient(135deg,var(--surface2,#F2EEE9),var(--surface,#fff));\
+  border:1px dashed var(--border2,#CBBBA5);opacity:.7;pointer-events:none;\
+}\
 @media(max-width:1024px){.bl-grid{grid-template-columns:1fr 1fr}}\
-@media(max-width:640px) {.bl-grid{grid-template-columns:1fr}}\
+@media(max-width:640px){.bl-grid{grid-template-columns:1fr}}\
 ';
 
   document.head.appendChild(style);
@@ -409,48 +298,55 @@ function triggerReveal() {
 ══════════════════════════════════════════ */
 (function initHomepageBlog() {
 
+  var RETRY_LIMIT = 2;
+  var retryCount = 0;
+
   function loadBlogs() {
     var grid = document.getElementById('ss-blog-grid');
     if (!grid) return;
 
     if (typeof fetchBlogs !== 'function') {
-      console.error(
-        '[SparkShield Blog] fetchBlogs() not found.\n' +
-        'Ensure blog-config.js loads BEFORE blog-ui.js.'
-      );
+      console.error('[SparkShield Blog] fetchBlogs() not found. Ensure blog-config.js loads BEFORE blog-ui.js.');
       grid.innerHTML = buildErrorState('Configuration error — contact the developer.');
       return;
     }
 
-    // Show shimmer skeletons right away
     grid.innerHTML = buildBlogSkeletons(3);
+    console.log('[SparkShield Blog] Fetching posts… (attempt ' + (retryCount + 1) + ')');
 
-    console.log('[SparkShield Blog] Fetching posts…');
+    var timeout = new Promise(function(_, reject) {
+      setTimeout(function() { reject(new Error('Request timed out after 8s')); }, 8000);
+    });
 
-    fetchBlogs({ limit: 3 })
+    Promise.race([fetchBlogs({ limit: 3 }), timeout])
       .then(function(blogs) {
-        console.log('[SparkShield Blog] Received ' + (blogs ? blogs.length : 0) + ' posts:', blogs);
+        retryCount = 0;
+        console.log('[SparkShield Blog] Received ' + (blogs ? blogs.length : 0) + ' posts.');
 
         if (!blogs || blogs.length === 0) {
-          console.warn(
-            '[SparkShield Blog] 0 rows returned.\n' +
-            'Fix checklist:\n' +
-            '  1. Supabase → blogs table → confirm "website" column = "sparkshield"\n' +
-            '  2. Supabase → Authentication → Policies → blogs table → add SELECT for anon\n' +
-            '  3. Run in DevTools: fetchBlogs({limit:3}).then(console.log)'
-          );
-          grid.innerHTML = buildEmptyState();
+          console.warn('[SparkShield Blog] 0 rows returned. Check:\n  1. Supabase project not paused\n  2. RLS policy allows anon SELECT\n  3. website column = "sparkshield"');
+          grid.innerHTML = buildEmptyState('No articles published yet. Check back soon!');
           return;
         }
 
-        // Render cards — they animate in via @keyframes blCardIn, no .rv/.on needed
-        grid.innerHTML = blogs.map(function(b) {
-          return buildBlogCard(b);
-        }).join('');
+        grid.innerHTML = blogs.map(function(b) { return buildBlogCard(b); }).join('');
       })
       .catch(function(err) {
-        console.error('[SparkShield Blog] Fetch error:', err);
-        grid.innerHTML = buildErrorState();
+        console.error('[SparkShield Blog] Fetch error:', err.message);
+
+        if (retryCount < RETRY_LIMIT) {
+          retryCount++;
+          console.log('[SparkShield Blog] Retrying in 3s… (' + retryCount + '/' + RETRY_LIMIT + ')');
+          grid.innerHTML = buildBlogSkeletons(3);
+          setTimeout(loadBlogs, 3000);
+        } else {
+          retryCount = 0;
+          var isTimeout = err.message && err.message.indexOf('timed out') !== -1;
+          var msg = isTimeout
+            ? 'Connection timed out. Please check your network and try again.'
+            : 'Could not load articles. Please try again.';
+          grid.innerHTML = buildErrorState(msg);
+        }
       });
   }
 

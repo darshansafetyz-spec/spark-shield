@@ -35,9 +35,22 @@ async function fetchBlogs({ limit = BLOG_CONFIG.BLOG_LIST_LIMIT, offset = 0, slu
     url += `&limit=${limit}&offset=${offset}`;
   }
 
-  const res = await fetch(url, { headers: SUPABASE_HEADERS });
-  if (!res.ok) throw new Error(`Supabase error: ${res.status} ${res.statusText}`);
-  return res.json();
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+  try {
+    const res = await fetch(url, {
+      headers: SUPABASE_HEADERS,
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    if (!res.ok) throw new Error(`Supabase error: ${res.status} ${res.statusText}`);
+    return res.json();
+  } catch (err) {
+    clearTimeout(timeoutId);
+    if (err.name === 'AbortError') throw new Error('Request timed out after 8s');
+    throw err;
+  }
 }
 
 function getBlogImageUrl(path) {
